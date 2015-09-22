@@ -38,6 +38,7 @@ static int cmd_si(char *args){
 		cpu_exec(1);
 	else{
 		number = strtol(args, NULL, 10);	
+		printf("%d\n",number);
 		if(number > 0)
 			cpu_exec(number);
 		else
