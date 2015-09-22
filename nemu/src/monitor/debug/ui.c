@@ -38,7 +38,6 @@ static int cmd_si(char *args){
 		cpu_exec(1);
 	else{
 		number = strtol(args, NULL, 10);	
-		printf("%d\n",number);
 		if(number > 0)
 			cpu_exec(number);
 		else
@@ -78,6 +77,8 @@ static int cmd_q(char *args) {
 static int cmd_help(char *args);
 static int cmd_p(char *args);
 static int cmd_x(char *args);
+static int cmd_w(char *args);
+static int cmd_d(char *args);
 
 static struct {
 	char *name;
@@ -90,7 +91,9 @@ static struct {
 	{ "si", "single step si for 1 step and si n for n step", cmd_si },
 	{ "info", "info r 打印寄存器状态, info w 打印监视点信息", cmd_info },
 	{ "p", "表达式求值, 示例:p $eax+1", cmd_p},
-	{ "x", "扫描内存,x N EXPR, 以16进制输出EXPR后N个4字节单元", cmd_x }
+	{ "x", "扫描内存,x N EXPR, 以16进制输出EXPR后N个4字节单元", cmd_x },
+	{ "w", "设置监视点,示例w *0x2000,当表达式的值发生变化时停止执行", cmd_w },
+	{ "d", "删除监视点,示例d N, 删除监视点序号为N的监视点", cmd_d }
 	/* TODO: Add more commands */
 
 };
@@ -101,6 +104,14 @@ static int cmd_p(char *args){
 }
 
 static int cmd_x(char *args){
+	return 0;
+}
+
+static int cmd_w(char *args){
+	return 0;
+}
+
+static int cmd_d(char *args){
 	return 0;
 }
 
