@@ -10,7 +10,9 @@ typedef struct watchpoint {
 
 	/* TODO: Add more members if necessary */
 
-
 } WP;
+
+void init_wp_list();
+extern WP *head, *free_;
 
 #endif
