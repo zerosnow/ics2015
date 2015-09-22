@@ -62,7 +62,8 @@ static int cmd_info(char *args){
 			printf("cpu.eip = %d\n", cpu.eip);
 		}
 		else if('w' == args[0]){
-
+			for(free_=head;free_!=NULL;free_=free_->next)
+				printf("%d,%x",free_->NO,free_->address);
 		}
 		else 
 			printf("info r 打印寄存器状态, info w 打印监视点信息\n");
