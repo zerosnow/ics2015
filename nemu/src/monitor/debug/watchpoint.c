@@ -14,8 +14,8 @@ void init_wp_list() {
 	}
 	wp_list[NR_WP - 1].next = NULL;
 
-	head = NULL;
-	free_ = wp_list;
+	head = wp_list;
+	free_ = NULL;
 }
 
 /* TODO: Implement the functionality of watchpoint */

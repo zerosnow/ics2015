@@ -37,7 +37,7 @@ static int cmd_si(char *args){
 	if(NULL == args)
 		cpu_exec(1);
 	else{
-		number = atoi(args);
+		number = atoi(args);	
 		if(number > 0)
 			cpu_exec(number);
 		else
@@ -51,15 +51,15 @@ static int cmd_info(char *args){
 		printf("info r 打印寄存器状态, info w 打印监视点信息\n");
 	else{
 		if('r' == args[0]){
-			printf("cpu.eax = %d", cpu.eax);
-			printf("cpu.ebx = %d", cpu.ebx);
-			printf("cpu.ecx = %d", cpu.ecx);
-			printf("cpu.edx = %d", cpu.edx);
-			printf("cpu.esp = %d", cpu.esp);
-			printf("cpu.ebp = %d", cpu.ebp);
-			printf("cpu.esi = %d", cpu.esi);
-			printf("cpu.edi = %d", cpu.edi);
-			printf("cpu.eip = %d", cpu.eip);
+			printf("cpu.eax = %d\n", cpu.eax);
+			printf("cpu.ebx = %d\n", cpu.ebx);
+			printf("cpu.ecx = %d\n", cpu.ecx);
+			printf("cpu.edx = %d\n", cpu.edx);
+			printf("cpu.esp = %d\n", cpu.esp);
+			printf("cpu.ebp = %d\n", cpu.ebp);
+			printf("cpu.esi = %d\n", cpu.esi);
+			printf("cpu.edi = %d\n", cpu.edi);
+			printf("cpu.eip = %d\n", cpu.eip);
 		}
 		else if('w' == args[0]){
 
@@ -75,6 +75,8 @@ static int cmd_q(char *args) {
 }
 
 static int cmd_help(char *args);
+static int cmd_p(char *args);
+static int cmd_x(char *args);
 
 static struct {
 	char *name;
@@ -85,13 +87,21 @@ static struct {
 	{ "c", "Continue the execution of the program", cmd_c },
 	{ "q", "Exit NEMU", cmd_q },
 	{ "si", "single step si for 1 step and si n for n step", cmd_si },
-	{ "info", "info r 打印寄存器状态, info w 打印监视点信息", cmd_info }
-
+	{ "info", "info r 打印寄存器状态, info w 打印监视点信息", cmd_info },
+	{ "p", "表达式求值, 示例:p $eax+1", cmd_p},
+	{ "x", "扫描内存,x N EXPR, 以16进制输出EXPR后N个4字节单元", cmd_x }
 	/* TODO: Add more commands */
 
 };
 
 #define NR_CMD (sizeof(cmd_table) / sizeof(cmd_table[0]))
+static int cmd_p(char *args){
+	return 0;
+}
+
+static int cmd_x(char *args){
+	return 0;
+}
 
 static int cmd_help(char *args) {
 	/* extract the first argument */
