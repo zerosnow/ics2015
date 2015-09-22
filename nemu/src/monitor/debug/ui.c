@@ -32,6 +32,44 @@ static int cmd_c(char *args) {
 	return 0;
 }
 
+static int cmd_si(char *args){
+	int number = 0;
+	if(NULL == args)
+		cpu_exec(1);
+	else{
+		number = atoi(args);
+		if(number > 0)
+			cpu_exec(number);
+		else
+			printf("parameter error!\n si for 1 step and si n for n step\n");
+	}
+	return 0;
+}
+
+static int cmd_info(char *args){
+	if(NULL == args)
+		printf("info r 打印寄存器状态, info w 打印监视点信息\n");
+	else{
+		if('r' == args[0]){
+			printf("cpu.eax = %d", cpu.eax);
+			printf("cpu.ebx = %d", cpu.ebx);
+			printf("cpu.ecx = %d", cpu.ecx);
+			printf("cpu.edx = %d", cpu.edx);
+			printf("cpu.esp = %d", cpu.esp);
+			printf("cpu.ebp = %d", cpu.ebp);
+			printf("cpu.esi = %d", cpu.esi);
+			printf("cpu.edi = %d", cpu.edi);
+			printf("cpu.eip = %d", cpu.eip);
+		}
+		else if('w' == args[0]){
+
+		}
+		else 
+			printf("info r 打印寄存器状态, info w 打印监视点信息\n");
+	}
+	return 0;
+}
+
 static int cmd_q(char *args) {
 	return -1;
 }
@@ -46,6 +84,8 @@ static struct {
 	{ "help", "Display informations about all supported commands", cmd_help },
 	{ "c", "Continue the execution of the program", cmd_c },
 	{ "q", "Exit NEMU", cmd_q },
+	{ "si", "single step si for 1 step and si n for n step", cmd_si },
+	{ "info", "info r 打印寄存器状态, info w 打印监视点信息", cmd_info }
 
 	/* TODO: Add more commands */
 
