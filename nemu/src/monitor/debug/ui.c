@@ -37,7 +37,7 @@ static int cmd_si(char *args){
 	if(NULL == args)
 		cpu_exec(1);
 	else{
-		number = atoi(args);	
+		number = strtol(args, NULL, 10);	
 		if(number > 0)
 			cpu_exec(number);
 		else
