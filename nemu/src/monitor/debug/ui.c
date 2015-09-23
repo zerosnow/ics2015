@@ -103,8 +103,9 @@ static struct {
 
 
 static int cmd_p(char *args){
-	createPostfixExpression(args);
-	printf("result is %x",calPostfixExpression());
+	bool success;
+	expr(args,&success);//createPostfixExpression(args);
+	//printf("result is %d",calPostfixExpression());
 	return 0;
 }
 
