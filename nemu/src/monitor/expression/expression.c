@@ -77,5 +77,58 @@ int intPop(void)
 
 int calPostfixExpression(void)
 {
-	return 0;
+	int number=0,right_oprand;		//right_oprand为又操作数
+	top=-1;
+	postCount=0;		//初始化
+	while(postfix[postCount]!='\0')
+	{
+		switch(postfix[postCount])
+		{
+		case '0':case '1':case '2':case '3':case '4':case '5':case '6':case '7':case '8':case '9':
+			number = number*10+(postfix[postCount]-'0');
+			break;
+		case ' ':
+			if(0==postCount)
+				break;
+			switch(postfix[postCount-1])
+			{
+				case '+':
+					right_oprand=intPop();
+					intPush(intPop()+right_oprand);
+					break;
+				case '-':
+					right_oprand=intPop();
+					intPush(intPop()-right_oprand);
+					break;
+				case '*':
+					right_oprand=intPop();
+					intPush(intPop()*right_oprand);
+					break;	
+				case '/':
+					right_oprand=intPop();
+					if(right_oprand)
+						intPush(intPop()/right_oprand);
+					else
+					{
+						printf("divide zero\n");
+						return -1;
+					}
+					break;
+				case ' ':
+					break;
+				default :
+					intPush(number);
+					number=0;
+					break;
+			}
+		case '+':case '-':case '*':case '/':
+			break;
+		default:
+			printf("illegal input\n");
+			return -1;
+		}
+		postCount++;
+	}
+	
+	return intPop();
 }

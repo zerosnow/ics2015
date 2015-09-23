@@ -104,6 +104,7 @@ static struct {
 
 static int cmd_p(char *args){
 	createPostfixExpression(args);
+	printf("result is %x",calPostfixExpression());
 	return 0;
 }
 
