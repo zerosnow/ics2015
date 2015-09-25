@@ -141,7 +141,12 @@ uint32_t expr(char *e, bool *success) {
 		return 0;
 	}
 	createPostfixExpression(tokens);
-	while(postfix[i].type!=0){
+	while(tokens[i].type!=0){
+		printf("%d:%s\n",tokens[i].type,tokens[i].str);
+		i++;
+	}
+	i=0;
+while(postfix[i].type!=0){
 		printf("%d:%s\n",postfix[i].type,postfix[i].str);
 		i++;
 	}
