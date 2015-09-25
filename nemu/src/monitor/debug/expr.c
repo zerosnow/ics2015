@@ -23,6 +23,7 @@ static struct rule {
 	{"\\*", '*'},
 	{"\\/", '/'},
 	{"^[0-9]+",NUM},					//number
+	{"^[0-9a-fA-F]+",HEX},
 	{"^\\$[a-z]+",REG},					//register
 	{"\\(", '('},	
 	{"\\)", ')'}
@@ -61,6 +62,7 @@ void init_token(){		//将token的type初始化为0方便之后的判断
 }
 
 static bool make_token(char *e) {
+	int middleTran;
 	int position = 0;
 	int i;
 	int j=0;	
@@ -86,6 +88,10 @@ static bool make_token(char *e) {
 
 				switch(rules[i].token_type) {
 					case NOTYPE:
+						break;
+					case HEX:
+						sscanf(tokens[nr_token].str, "%x", &middleTran);
+						sprintf(tokens[nr_token].str, "%d", middleTran);
 						break;
 					case REG:
 						strncpy(tokens[nr_token].str, substr_start+1, substr_len-1);
