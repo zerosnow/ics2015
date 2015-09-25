@@ -53,10 +53,13 @@ void createPostfixExpression(Token *infix)
 			}
 			//其他情况作为乘号直接往下运行
 		case '/':
-			if(TokenStack[top].type=='+'||TokenStack[top].type=='-'||top==-1)
+			if(TokenStack[top].type=='+'||TokenStack[top].type=='-')
 				TokenPush(infix[inCount]);
 			else
+			{
 				TokenPop();
+				TokenPush(infix[inCount]);
+			}
 			break;
 		case '(':
 			TokenPush(infix[inCount]);
