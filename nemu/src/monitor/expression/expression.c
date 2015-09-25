@@ -66,7 +66,7 @@ void createPostfixExpression(Token *infix)
 				TokenPush(infix[inCount]);
 			else
 			{
-				TokenPop();
+				TokenPopOne();
 				TokenPush(infix[inCount]);
 			}
 			break;
