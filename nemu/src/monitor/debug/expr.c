@@ -91,7 +91,8 @@ static bool make_token(char *e) {
 
 				switch(rules[i].token_type) {
 					case REG:
-						strncpy(tokens[nr_token].str, substr_start+1, substr_len);
+						strncpy(tokens[nr_token].str, substr_start+1, substr_len-1);
+						tokens[nr_token].str[substr_len-1]='\0';
 						for(j=0;j<8;j++)
 						{
 							if(0 == strcmp(tokens[nr_token].str,reg_name[j]))
@@ -116,7 +117,8 @@ static bool make_token(char *e) {
 						break;
 					default: 
 						tokens[nr_token].type=rules[i].token_type;
-						strncpy(tokens[nr_token].str, substr_start, substr_len+1);
+						strncpy(tokens[nr_token].str, substr_start, substr_len);
+						tokens[nr_token].str[substr_len]='\0';
 						nr_token++;
 						//panic("please implement me");
 				}
