@@ -7,7 +7,6 @@
 #include <regex.h>
 #include <stdlib.h>
 
-char *reg_name[] = {"eax","ebx","ecx","edx","esp","ebp","esi","edi","eip"};
 enum {
 	NOTYPE = 256, EQ, NUM, REG,
 
@@ -69,7 +68,8 @@ int nr_token;
 static bool make_token(char *e) {
 	int position = 0;
 	int i;
-	int j=0;
+	int j=0;	
+	char *reg_name[] = {"eax","ecx","edx","ebx","esp","ebp","esi","edi"};
 	regmatch_t pmatch;
 	
 	nr_token = 0;
@@ -95,7 +95,7 @@ static bool make_token(char *e) {
 						for(j=0;j<8;j++)
 						{
 							
-						printf("%d\n",j);
+							printf("%d\n",j);
 							if(0 == strcmp(tokens[nr_token].str,reg_name[j]))
 							{
 								printf("%d\n",j);
