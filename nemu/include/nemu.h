@@ -5,5 +5,6 @@
 #include "memory/memory.h"
 #include "cpu/reg.h"
 #include "monitor/expression/expression.h"
+#include "monitor/expr.h"
 
 #endif

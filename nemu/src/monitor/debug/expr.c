@@ -8,10 +8,7 @@
 #include <stdlib.h>
 
 enum {
-	NOTYPE = 256, EQ, NUM, REG,
-
-	/* TODO: Add more token types */
-
+	NOTYPE = 256, NUM, REG,
 };
 
 static struct rule {
@@ -28,7 +25,6 @@ static struct rule {
 	{"\\-", '-'},
 	{"\\*", '*'},
 	{"\\/", '/'},
-	{"==", EQ},						// equal
 	{"^[0-9]+",NUM},					//number
 	{"^\\$[a-z]+",REG},					//register
 	{"\\(", '('},	
@@ -57,10 +53,6 @@ void init_regex() {
 	}
 }
 
-typedef struct token {
-	int type;
-	char str[32];
-} Token;
 
 Token tokens[32];
 int nr_token;
@@ -138,13 +130,11 @@ static bool make_token(char *e) {
 }
 
 uint32_t expr(char *e, bool *success) {
-	int i;
 	if(!make_token(e)) {
 		*success = false;
 		return 0;
 	}
-	for(i=0;i<nr_token;i++)
-		printf("%d : %s\n",tokens[i].type,tokens[i].str);
+		
 
 	/* TODO: Insert codes to evaluate the expression. */
 //	panic("please implement me");

@@ -5,4 +5,9 @@
 
 uint32_t expr(char *, bool *);
 
+typedef struct token {
+	int type;
+	char str[32];
+} Token;
+
 #endif
