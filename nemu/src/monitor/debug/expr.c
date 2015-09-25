@@ -30,7 +30,7 @@ static struct rule {
 	{"\\*", '*'},
 	{"\\/", '/'},
 	{"==", EQ},						// equal
-	{"^[0-9]+$",NUM},					//number
+	{"^[0-9]+",NUM},					//number
 	{"\\$[a-z]+$",REG},					//register
 	{"(", '('},	
 	{")", ')'}
@@ -50,6 +50,7 @@ void init_regex() {
 	int ret;
 
 	for(i = 0; i < NR_REGEX; i ++) {
+		printf("%d",i);
 		ret = regcomp(&re[i], rules[i].regex, REG_EXTENDED);
 		if(ret != 0) {
 			regerror(ret, &re[i], error_msg, 128);
