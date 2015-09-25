@@ -65,8 +65,8 @@ int hexToi(char *hex)
 {
 	int number=0;
 	int i=0;
-//	if(hex[0]=='0'&&hex[1]=='x')
-//		hex=hex+2;
+	if(hex[0]=='0'&&hex[1]=='x')
+		hex=hex+2;
 	printf("%s\n",hex);
 	while(hex[i]!='\0')
 	{
