@@ -107,7 +107,11 @@ static int cmd_info(char *args){
 
 static int cmd_p(char *args){
 	bool success;
-	printf("%d\n",expr(args,&success));
+	int result = expr(args,&success);
+	if(false==success)
+		printf("Expression is wrong");
+	else
+		printf("%d\n",result);
 	return 0;
 }
 
@@ -123,7 +127,7 @@ static int cmd_x(char *args){
 	else{
 		addr = expr(caddr,&success);
 		if(false==success)
-			printf("Expression is wrong");
+			printf("Expression is wrong\n");
 		else
 			for(i=0;i<size;i++)
 				printf("%d\n",swaddr_read(addr+i*4,4));
