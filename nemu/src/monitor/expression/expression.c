@@ -20,10 +20,13 @@ void TokenPop(void)
 
 void TokenPopOne(void)
 {
-	postfix[postCount].type=TokenStack[top].type;
-	strcpy(postfix[postCount].str,TokenStack[top].str);
-	top--;
-	postCount++;
+	if(top>=0)
+	{
+		postfix[postCount].type=TokenStack[top].type;
+		strcpy(postfix[postCount].str,TokenStack[top].str);
+		top--;
+		postCount++;
+	}
 }
 	
 void createPostfixExpression(Token *infix)
