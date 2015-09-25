@@ -117,8 +117,8 @@ static bool make_token(char *e) {
 					case HEX:
 						tokens[nr_token].type=rules[i].token_type;
 						strncpy(tokens[nr_token].str, substr_start, substr_len);
-						printf("%s\n",tokens[nr_token].str);
 						tokens[nr_token].str[substr_len]='\0';
+						printf("%s\n",tokens[nr_token].str);
 						nr_token++;
 						middleTran=strtol(tokens[nr_token].str+2, NULL, 16);
 						sprintf(tokens[nr_token].str, "%d", middleTran);
