@@ -69,7 +69,7 @@ int nr_token;
 static bool make_token(char *e) {
 	int position = 0;
 	int i;
-	int j;
+	int j=0;
 	regmatch_t pmatch;
 	
 	nr_token = 0;
