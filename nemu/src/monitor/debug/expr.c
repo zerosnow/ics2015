@@ -95,6 +95,7 @@ static bool make_token(char *e) {
 						for(j=0;j<8;j++)
 							if(0 == strcmp(tokens[nr_token].str,reg_name[j]))
 							{
+								printf("%d\n",j);
 								sprintf(tokens[nr_token].str, "%d", cpu.gpr[i]._32);
 								tokens[nr_token].type = NUM;
 								break;
