@@ -90,6 +90,8 @@ static bool make_token(char *e) {
 				 */
 
 				switch(rules[i].token_type) {
+					case NOTYPE:
+						break;
 					case REG:
 						strncpy(tokens[nr_token].str, substr_start+1, substr_len-1);
 						tokens[nr_token].str[substr_len-1]='\0';
@@ -97,7 +99,7 @@ static bool make_token(char *e) {
 						{
 							if(0 == strcmp(tokens[nr_token].str,reg_name[j]))
 							{
-								sprintf(tokens[nr_token].str, "%d", cpu.gpr[i]._32);
+								sprintf(tokens[nr_token].str, "%d", cpu.gpr[j]._32);
 								tokens[nr_token].type = NUM;
 								break;
 							}
