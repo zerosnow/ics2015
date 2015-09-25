@@ -62,7 +62,7 @@ void init_token(){		//将token的type初始化为0方便之后的判断
 }
 
 static bool make_token(char *e) {
-	int middleTran;
+	long int middleTran;
 	int position = 0;
 	int i;
 	int j=0;	
@@ -121,8 +121,8 @@ static bool make_token(char *e) {
 						printf("%s\n",tokens[nr_token].str);
 						nr_token++;
 						middleTran=strtol(tokens[nr_token].str, NULL, 16);
-						sprintf(tokens[nr_token].str, "%d", middleTran);
-						printf("%d\n",middleTran);
+						sprintf(tokens[nr_token].str, "%ld", middleTran);
+						printf("%ld\n",middleTran);
 						break;
 					default: 
 						tokens[nr_token].type=rules[i].token_type;
