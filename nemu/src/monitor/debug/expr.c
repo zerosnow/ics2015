@@ -91,7 +91,7 @@ static bool make_token(char *e) {
 
 				switch(rules[i].token_type) {
 					case REG:
-						strncpy(tokens[nr_token].str, substr_start+1, substr_len-1);
+						strncpy(tokens[nr_token].str, substr_start+1, substr_len);
 						for(j=0;j<8;j++)
 						{
 							
