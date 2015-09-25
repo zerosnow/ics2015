@@ -5,6 +5,10 @@
 
 uint32_t expr(char *, bool *);
 
+enum {
+	NOTYPE = 256, NUM, REG, ADDR
+};
+
 typedef struct token {
 	int type;
 	char str[32];

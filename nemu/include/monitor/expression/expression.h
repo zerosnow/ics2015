@@ -1,18 +1,22 @@
+#include "monitor/expr.h"
+#include "memory/memory.h"
+
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
-#define SIZE 100
+#define SIZE 15
 
-char charStack[SIZE];
-void charPop(void);
-void charPush(char c);
+Token TokenStack[SIZE];
+void TokenPop(void);
+void TokenPush(Token token);
 
 int intStack[SIZE];
 int intPop(void);
 void intPush(int n);
 
-char postfix[SIZE];			//后缀表达式
+Token postfix[32];			//后缀表达式
 int top,postCount;
 
-void createPostfixExpression(char *infix);		//利用中缀表达式生成后缀表达式
+void createPostfixExpression(Token *infix);		//利用中缀表达式生成后缀表达式
 int calPostfixExpression(void);		//计算后缀表达式，返回结果

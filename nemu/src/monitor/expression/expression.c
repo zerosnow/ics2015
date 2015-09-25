@@ -1,17 +1,19 @@
 #include "monitor/expression/expression.h"
 
-void charPush(char c)
+void TokenPush(Token token)
 {
 	top++;
-	charStack[top]=c;
+	TokenStack[top].type=token.type;
+	strcpy(TokenStack[top].str,token.str);
 }
 
-void charPop(void)
+void TokenPop(void)
 {
-	while(top>=0&&charStack[top]!='(')
+	while(top>=0&&TokenStack[top].type!='(')
 	{
 		postCount++;
-		postfix[postCount]=charStack[top];
+		postfix[postCount].type=TokenStack[top].type;
+		strcpy(postfix[postCount].str,TokenStack[top].str);
 		top--;
 		postCount++;
 	}
@@ -19,49 +21,61 @@ void charPop(void)
 		postCount++;
 }
 
-void createPostfixExpression(char *infix)
+void createPostfixExpression(Token *infix)
 {
+	int i;				//计数器
 	int inCount=0;		//中缀表达式计数器
 	top=-1;
 	postCount=0;
-	memset(postfix,' ',SIZE);//初始化
-	while(infix[inCount]!='\0')
+	for(i=0;i<32;i++)
+		postfix[i].type=0;	//初始化
+	while(infix[inCount].type!=0)
 	{
-		switch(infix[inCount])
+		switch(infix[inCount].type)
 		{
-		case '0':case '1':case '2':case '3':case '4':case '5':case '6':case '7':case '8':case '9':
-			postfix[postCount]=infix[inCount];
+		case NUM:
+			postfix[postCount].type=infix[inCount].type;
+			strcpy(postfix[postCount].str,infix[inCount].str);
 			postCount++;
 			break;
 		case '+':case '-':
-			postCount++;		//空格
-			charPop();
-			charPush(infix[inCount]);
+			TokenPop();
+			TokenPush(infix[inCount]);
 			break;
-		case '*':case '/':
-			postCount++;
-			if(charStack[top]=='+'||charStack[top]=='-')
-				charPush(infix[inCount]);
+		case '*':
+			if(0==inCount || (infix[inCount-1].type == '(') || (infix[inCount-1].type == '+') ||
+				(infix[inCount-1].type == '-') || (infix[inCount-1].type == '*') ||
+				(infix[inCount-1].type == '/'))	//如果在最开始，则为取地址，如果前面为运算符，则为取地址
+			{
+				infix[inCount].type=ADDR;
+				if(TokenStack[top].type=='+'||TokenStack[top].type=='-'||TokenStack[top].type=='*'||TokenStack[top].type=='/')
+					TokenPush(infix[inCount]);
+				else
+					TokenPop();
+				break;
+			}
+			//其他情况作为乘号直接往下运行
+		case '/':
+			if(TokenStack[top].type=='+'||TokenStack[top].type=='-')
+				TokenPush(infix[inCount]);
 			else
-				charPop();
+				TokenPop();
 			break;
 		case '(':
-			charPush(infix[inCount]);
+			TokenPush(infix[inCount]);
 			break;
 		case ')':
-			charPop();
+			TokenPop();
 			top--;
 			break;
 		default:
 			printf("illegal input!\n");
-			postfix[0]='\0';
+			postfix[0].type=0;
 			return; 
 		}
 		inCount++;
 	}
-	charPop();
-	postfix[postCount]='\0';
-	printf("%s\n",postfix);
+	TokenPop();
 }
 
 void intPush(int n)
@@ -77,51 +91,40 @@ int intPop(void)
 
 int calPostfixExpression(void)
 {
-	int number=0,right_oprand;		//right_oprand为又操作数
+	int right_oprand;		//right_oprand为又操作数
 	top=-1;
 	postCount=0;		//初始化
-	while(postfix[postCount]!='\0')
+	while(postfix[postCount].type!=0)
 	{
-		switch(postfix[postCount])
+		switch(postfix[postCount].type)
 		{
-		case '0':case '1':case '2':case '3':case '4':case '5':case '6':case '7':case '8':case '9':
-			number = number*10+(postfix[postCount]-'0');
+		case NUM:
+			intPush(atoi(postfix[postCount].str));
 			break;
-		case ' ':
-			if(0==postCount)
-				break;
-			switch(postfix[postCount-1])
+		case '+':
+			right_oprand=intPop();
+			intPush(intPop()+right_oprand);
+			break;
+		case '-':
+			right_oprand=intPop();
+			intPush(intPop()-right_oprand);
+			break;
+		case '*':
+			right_oprand=intPop();
+			intPush(intPop()*right_oprand);
+			break;	
+		case '/':
+			right_oprand=intPop();
+			if(right_oprand)
+				intPush(intPop()/right_oprand);
+			else
 			{
-				case '+':
-					right_oprand=intPop();
-					intPush(intPop()+right_oprand);
-					break;
-				case '-':
-					right_oprand=intPop();
-					intPush(intPop()-right_oprand);
-					break;
-				case '*':
-					right_oprand=intPop();
-					intPush(intPop()*right_oprand);
-					break;	
-				case '/':
-					right_oprand=intPop();
-					if(right_oprand)
-						intPush(intPop()/right_oprand);
-					else
-					{
-						printf("divide zero\n");
-						return -1;
-					}
-					break;
-				case ' ':
-					break;
-				default :
-					intPush(number);
-					number=0;
-					break;
+				printf("divide zero\n");
+				return -1;
 			}
-		case '+':case '-':case '*':case '/':
+			break;
+		case ADDR:
+			intPush(swaddr_read(intPop(),4));
 			break;
 		default:
 			printf("illegal input\n");

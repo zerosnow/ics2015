@@ -7,9 +7,6 @@
 #include <regex.h>
 #include <stdlib.h>
 
-enum {
-	NOTYPE = 256, NUM, REG,
-};
 
 static struct rule {
 	char *regex;
@@ -54,8 +51,14 @@ void init_regex() {
 }
 
 
+static int nr_token;
 Token tokens[32];
-int nr_token;
+
+void init_token(){		//将token的type初始化为0方便之后的判断
+	int i;
+	for(i=0;i<32;++i)
+		tokens[i].type=0;
+}
 
 static bool make_token(char *e) {
 	int position = 0;
@@ -130,14 +133,12 @@ static bool make_token(char *e) {
 }
 
 uint32_t expr(char *e, bool *success) {
+	init_token();
 	if(!make_token(e)) {
 		*success = false;
 		return 0;
 	}
-		
-
-	/* TODO: Insert codes to evaluate the expression. */
-//	panic("please implement me");
-	return 0;
+	createPostfixExpression(tokens);
+	return calPostfixExpression();
 }
 
