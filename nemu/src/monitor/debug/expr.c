@@ -115,7 +115,7 @@ static bool make_token(char *e) {
 						nr_token++;
 						break;
 				case HEX:
-						sscanf(tokens[nr_token].str, "%x", &middleTran);
+						sscanf(tokens[nr_token].str+2, "%x", &middleTran);
 						sprintf(tokens[nr_token].str, "%d", middleTran);
 						printf("%d\n",middleTran);
 				default: 
