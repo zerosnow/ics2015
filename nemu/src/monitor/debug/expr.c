@@ -22,9 +22,9 @@ static struct rule {
 	{"\\-", '-'},
 	{"\\*", '*'},
 	{"\\/", '/'},
-	{"0x[0-9a-fA-F]+",HEX},
-	{"[0-9]+",NUM},					//number
-	{"\\$[a-z]+",REG},					//register
+	{"^0x[0-9a-fA-F]+",HEX},
+	{"^[0-9]+",NUM},					//number
+	{"^\\$[a-z]+",REG},					//register
 	{"\\(", '('},	
 	{"\\)", ')'}
 	
@@ -89,10 +89,6 @@ static bool make_token(char *e) {
 				switch(rules[i].token_type) {
 					case NOTYPE:
 						break;
-					case HEX:
-						sscanf(tokens[nr_token].str, "%x", &middleTran);
-						sprintf(tokens[nr_token].str, "%d", middleTran);
-						break;
 					case REG:
 						strncpy(tokens[nr_token].str, substr_start+1, substr_len-1);
 						tokens[nr_token].str[substr_len-1]='\0';
@@ -118,7 +114,10 @@ static bool make_token(char *e) {
 						}
 						nr_token++;
 						break;
-					default: 
+				case HEX:
+						sscanf(tokens[nr_token].str, "%x", &middleTran);
+						sprintf(tokens[nr_token].str, "%d", middleTran);
+				default: 
 						tokens[nr_token].type=rules[i].token_type;
 						strncpy(tokens[nr_token].str, substr_start, substr_len);
 						tokens[nr_token].str[substr_len]='\0';
