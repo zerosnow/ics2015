@@ -145,6 +145,7 @@ uint32_t expr(char *e, bool *success) {
 		printf("%d:%s\n",tokens[i].type,tokens[i].str);
 		i++;
 	}
+	i=0;
 	while(postfix[i].type!=0)
 	{
 		printf("%d:%s\n",postfix[i].type,postfix[i].str);
