@@ -89,7 +89,6 @@ static bool make_token(char *e) {
 				 * types of tokens, some extra actions should be performed.
 				 */
 
-				printf("%d",rules[i].token_type);
 				switch(rules[i].token_type) {
 					case REG:
 						strncpy(tokens[nr_token].str, substr_start+1, substr_len-1);
@@ -128,9 +127,6 @@ static bool make_token(char *e) {
 			return false;
 		}
 	}
-	for(i=0;i<nr_token;i++)
-		printf("%d : %s",tokens[i].type,tokens[i].str);
-
 	return true; 
 }
 
