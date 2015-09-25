@@ -9,6 +9,7 @@
 
 Token TokenStack[SIZE];
 void TokenPop(void);
+void TokenPopOne(void);
 void TokenPush(Token token);
 
 int intStack[SIZE];

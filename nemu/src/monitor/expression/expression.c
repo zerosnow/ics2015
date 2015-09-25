@@ -18,6 +18,14 @@ void TokenPop(void)
 	}
 }
 
+void TokenPopOne(void)
+{
+	postfix[postCount].type=TokenStack[top].type;
+	strcpy(postfix[postCount].str,TokenStack[top].str);
+	top--;
+	postCount++;
+}
+	
 void createPostfixExpression(Token *infix)
 {
 	int i;				//计数器
@@ -45,7 +53,8 @@ void createPostfixExpression(Token *infix)
 				(infix[inCount-1].type == '/'))	//如果在最开始，则为取地址，如果前面为运算符，则为取地址
 			{
 				infix[inCount].type=ADDR;
-				if(top == -1 ||TokenStack[top].type=='+'||TokenStack[top].type=='-'||TokenStack[top].type=='*'||TokenStack[top].type=='/')
+				if(top == -1 ||TokenStack[top].type=='+'||TokenStack[top].type=='-'||
+					TokenStack[top].type=='*'||TokenStack[top].type=='/'||TokenStack[top].type=='(')
 					TokenPush(infix[inCount]);
 				else
 					TokenPop();
@@ -57,7 +66,7 @@ void createPostfixExpression(Token *infix)
 				TokenPush(infix[inCount]);
 			else
 			{
-				TokenPop();
+				TokenPopOne();
 				TokenPush(infix[inCount]);
 			}
 			break;
