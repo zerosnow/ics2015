@@ -142,10 +142,10 @@ static bool make_token(char *e) {
 						strncpy(tokens[nr_token].str, substr_start, substr_len);
 						tokens[nr_token].str[substr_len]='\0';
 						printf("%s\n",tokens[nr_token].str);
-						nr_token++;
 						middleTran=hexToi(tokens[nr_token].str);
 						sprintf(tokens[nr_token].str, "%d", middleTran);
 						printf("%d\n",middleTran);
+						nr_token++;
 						break;
 					default: 
 						tokens[nr_token].type=rules[i].token_type;
