@@ -30,8 +30,8 @@ static struct rule {
 	{"\\*", '*'},
 	{"\\/", '/'},
 	{"==", EQ},						// equal
-	{"^[0-9]*$",NUM},					//number
-	{"\\$[a-z]*$^[^a-z]",REG},					//register
+	{"^[0-9]+$",NUM},					//number
+	{"\\$[a-z]+$",REG},					//register
 	{"(", '('},	
 	{")", ')'}
 	
