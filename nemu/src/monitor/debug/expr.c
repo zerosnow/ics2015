@@ -94,18 +94,14 @@ static bool make_token(char *e) {
 						strncpy(tokens[nr_token].str, substr_start+1, substr_len);
 						for(j=0;j<8;j++)
 						{
-							
-							printf("%d:%s,%s\n",j,tokens[nr_token].str,reg_name[j]);
 							if(0 == strcmp(tokens[nr_token].str,reg_name[j]))
 							{
-								printf("%d\n",j);
 								sprintf(tokens[nr_token].str, "%d", cpu.gpr[i]._32);
 								tokens[nr_token].type = NUM;
 								break;
 							}
 
 						}
-						printf("%d\n",j);
 						if(0 == strcmp(tokens[nr_token].str,"eip"))
 						{
 							sprintf(tokens[nr_token].str, "%d", cpu.gpr[i]._32);
@@ -120,7 +116,7 @@ static bool make_token(char *e) {
 						break;
 					default: 
 						tokens[nr_token].type=rules[i].token_type;
-						strncpy(tokens[nr_token].str, substr_start, substr_len);
+						strncpy(tokens[nr_token].str, substr_start, substr_len+1);
 						nr_token++;
 						//panic("please implement me");
 				}
