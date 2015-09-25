@@ -60,7 +60,7 @@ void createPostfixExpression(Token *infix)
 					TokenStack[top].type=='*'||TokenStack[top].type=='/'||TokenStack[top].type=='(')
 					TokenPush(infix[inCount]);
 				else
-					TokenPop();
+					TokenPopOne();
 				break;
 			}
 			//其他情况作为乘号直接往下运行
