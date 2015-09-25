@@ -45,7 +45,7 @@ void createPostfixExpression(Token *infix)
 				(infix[inCount-1].type == '/'))	//如果在最开始，则为取地址，如果前面为运算符，则为取地址
 			{
 				infix[inCount].type=ADDR;
-				if(TokenStack[top].type=='+'||TokenStack[top].type=='-'||TokenStack[top].type=='*'||TokenStack[top].type=='/')
+				if(top == -1 ||TokenStack[top].type=='+'||TokenStack[top].type=='-'||TokenStack[top].type=='*'||TokenStack[top].type=='/')
 					TokenPush(infix[inCount]);
 				else
 					TokenPop();
