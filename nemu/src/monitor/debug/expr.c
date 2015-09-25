@@ -93,6 +93,9 @@ static bool make_token(char *e) {
 					case REG:
 						strncpy(tokens[nr_token].str, substr_start+1, substr_len-1);
 						for(j=0;j<8;j++)
+						{
+							
+						printf("%d\n",j);
 							if(0 == strcmp(tokens[nr_token].str,reg_name[j]))
 							{
 								printf("%d\n",j);
@@ -100,6 +103,8 @@ static bool make_token(char *e) {
 								tokens[nr_token].type = NUM;
 								break;
 							}
+
+						}
 						printf("%d\n",j);
 						if(0 == strcmp(tokens[nr_token].str,"eip"))
 						{
