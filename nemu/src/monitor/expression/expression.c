@@ -72,7 +72,7 @@ void createPostfixExpression(Token *infix)
 				TokenPush(infix[inCount]);
 			else
 			{
-				while(TokenStack[top].type!='+'&&TokenStack[top].type!='-')
+				while(TokenStack[top].type!='+'&&TokenStack[top].type!='-'&&top>=0)
 					TokenPopOne();
 				TokenPush(infix[inCount]);
 			}
