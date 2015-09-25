@@ -138,7 +138,7 @@ static int cmd_x(char *args){
 static int cmd_w(char *args){
 	bool success;
 	int addr = expr(args,&success);
-	if(false == success)
+	if(false==success)
 		printf("Expression is wrong");
 	else{
 		free_=head;
