@@ -5,9 +5,11 @@
  */
 #include <sys/types.h>
 #include <regex.h>
+#include <stdlib.h>
 
+char *reg_name[] = {"eax","ebx","ecx","edx","esp","ebp","esi","edi","eip"};
 enum {
-	NOTYPE = 256, EQ
+	NOTYPE = 256, EQ, NUM, REG,
 
 	/* TODO: Add more token types */
 
@@ -24,7 +26,15 @@ static struct rule {
 
 	{" +",	NOTYPE},				// spaces
 	{"\\+", '+'},					// plus
-	{"==", EQ}						// equal
+	{"\\-", '-'},
+	{"\\*", '*'},
+	{"\\/", '/'},
+	{"==", EQ},						// equal
+	{"[0-9]",NUM},					//number
+	{"$[a-z]",REG},					//register
+	{"(", '('},	
+	{")", ')'}
+	
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
@@ -58,7 +68,7 @@ int nr_token;
 
 static bool make_token(char *e) {
 	int position = 0;
-	int i;
+	int i,j;
 	regmatch_t pmatch;
 	
 	nr_token = 0;
@@ -79,6 +89,27 @@ static bool make_token(char *e) {
 				 */
 
 				switch(rules[i].token_type) {
+					case REG:
+						strncpy(tokens[nr_token].str, substr_start+1, substr_len-1);
+						for(j=0;j<8;j++)
+							if(0 == strcmp(tokens[nr_token].str,reg_name[j]))
+							{
+								sprintf(tokens[nr_token].str, "%d", cpu.gpr[i]._32);
+								tokens[nr_token].type = NUM;
+								break;
+							}
+						if(0 == strcmp(tokens[nr_token].str,"eip"))
+						{
+							sprintf(tokens[nr_token].str, "%d", cpu.gpr[i]._32);
+							tokens[nr_token].type = NUM;
+						}
+						else if(8 == j)
+						{
+							panic("register is error");
+							return false;
+						}
+						nr_token++;
+						break;
 					default: 
 						tokens[nr_token].type=rules[i].token_type;
 						strncpy(tokens[nr_token].str, substr_start, substr_len);
@@ -100,10 +131,13 @@ static bool make_token(char *e) {
 }
 
 uint32_t expr(char *e, bool *success) {
+	int i;
 	if(!make_token(e)) {
 		*success = false;
 		return 0;
 	}
+	for(i=0;i<nr_token;i++)
+		printf("%d : %s",tokens[nr_token].type,tokens[nr_token].str);
 
 	/* TODO: Insert codes to evaluate the expression. */
 	panic("please implement me");
