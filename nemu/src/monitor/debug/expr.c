@@ -22,9 +22,9 @@ static struct rule {
 	{"\\-", '-'},
 	{"\\*", '*'},
 	{"\\/", '/'},
-	{"^[0-9]+",NUM},					//number
-	{"^0x[0-9a-fA-F]+",HEX},
-	{"^\\$[a-z]+",REG},					//register
+	{"[0-9]+",NUM},					//number
+	{"0x[0-9a-fA-F]+",HEX},
+	{"\\$[a-z]+",REG},					//register
 	{"\\(", '('},	
 	{"\\)", ')'}
 	
