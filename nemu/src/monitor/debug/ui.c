@@ -97,7 +97,7 @@ static int cmd_info(char *args){
 		}
 		else if('w' == args[0]){
 			for(free_=head;free_->address!=0;free_=free_->next)
-				printf("%d,%x\n",free_->NO,free_->address);
+				printf("%d,%x:%d\n",free_->NO,free_->address,free_->value);
 		}
 		else 
 			printf("info r 打印寄存器状态, info w 打印监视点信息\n");
@@ -107,20 +107,55 @@ static int cmd_info(char *args){
 
 static int cmd_p(char *args){
 	bool success;
-	printf("%d\n",expr(args,&success));//createPostfixExpression(args);
-	//printf("result is %d",calPostfixExpression());
+	printf("%d\n",expr(args,&success));
 	return 0;
 }
 
 static int cmd_x(char *args){
+	char *csize = strtok(args, " ");
+	char *caddr = csize+strlen(csize)+1;
+	int size = atoi(csize);
+	int addr;
+	int i;
+	bool success;
+	if(NULL == csize||NULL == caddr)
+		printf("x N EXPR,例如:x 10 $eax");
+	else{
+		addr = expr(caddr,&success);
+		if(false==success)
+			printf("Expression is wrong");
+		else
+			for(i=0;i<size;i++)
+				printf("%d\n",swaddr_read(addr+i*4,4));
+	}
 	return 0;
 }
 
 static int cmd_w(char *args){
+	bool success;
+	int addr = expr(args,&success);
+	if(false == success)
+		printf("Expression is wrong");
+	else{
+		free_=head;
+		while(free_->address!=0)free_=free_->next;
+		free_->address=addr;
+		free_->value=swaddr_read(addr,4);
+	}	
 	return 0;
 }
 
 static int cmd_d(char *args){
+	int n = atoi(args);
+	for(free_=head;free_->NO != n;free_=free_->next)
+		;
+	while(free_->next!=NULL)
+	{
+		free_->NO=free_->next->NO;
+		free_->address=free_->next->address;
+		free_->value=free_->next->value;
+		free_->next=free_->next->next;
+	}
 	return 0;
 }
 

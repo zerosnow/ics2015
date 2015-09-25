@@ -133,24 +133,12 @@ static bool make_token(char *e) {
 }
 
 uint32_t expr(char *e, bool *success) {
-	int i=0;
 	init_token();
 	if(!make_token(e)) {
 		*success = false;
 		return 0;
 	}
 	createPostfixExpression(tokens);
-	while(tokens[i].type!=0)
-	{
-		printf("%d:%s\n",tokens[i].type,tokens[i].str);
-		i++;
-	}
-	i=0;
-	while(postfix[i].type!=0)
-	{
-		printf("%d:%s\n",postfix[i].type,postfix[i].str);
-		i++;
-	}
 	return calPostfixExpression();
 }
 
