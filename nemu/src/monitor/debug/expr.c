@@ -31,7 +31,7 @@ static struct rule {
 	{"\\/", '/'},
 	{"==", EQ},						// equal
 	{"^[0-9]+",NUM},					//number
-	{"\\$[a-z]+$",REG},					//register
+	{"^\\$[a-z]+",REG},					//register
 	{"(", '('},	
 	{")", ')'}
 	
@@ -50,7 +50,6 @@ void init_regex() {
 	int ret;
 
 	for(i = 0; i < NR_REGEX; i ++) {
-		printf("%d",i);
 		ret = regcomp(&re[i], rules[i].regex, REG_EXTENDED);
 		if(ret != 0) {
 			regerror(ret, &re[i], error_msg, 128);
@@ -70,7 +69,7 @@ int nr_token;
 static bool make_token(char *e) {
 	int position = 0;
 	int i;
-	//int j;
+	int j;
 	regmatch_t pmatch;
 	
 	nr_token = 0;
@@ -91,7 +90,7 @@ static bool make_token(char *e) {
 				 */
 
 				switch(rules[i].token_type) {
-				/*	case REG:
+					case REG:
 						strncpy(tokens[nr_token].str, substr_start+1, substr_len-1);
 						for(j=0;j<8;j++)
 							if(0 == strcmp(tokens[nr_token].str,reg_name[j]))
@@ -111,7 +110,7 @@ static bool make_token(char *e) {
 							return false;
 						}
 						nr_token++;
-						break;*/
+						break;
 					default: 
 						tokens[nr_token].type=rules[i].token_type;
 						strncpy(tokens[nr_token].str, substr_start, substr_len);
