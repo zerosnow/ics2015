@@ -107,7 +107,12 @@ static int cmd_info(char *args){
 
 static int cmd_p(char *args){
 	bool success;
-	int result = expr(args,&success);
+	int result;
+	if(NULL==args){
+		printf("p EXPR,例如:p 2+4");
+		return 0;
+	}
+	result = expr(args,&success);
 	if(false==success)
 		printf("Expression is wrong");
 	else
@@ -138,7 +143,12 @@ static int cmd_x(char *args){
 
 static int cmd_w(char *args){
 	bool success;
-	int addr = expr(args,&success);
+	int addr;
+	if(NULL==args){
+		printf("w EXPR,例如:w 5+2");
+		return 0;
+	}
+	addr = expr(args,&success);
 	if(false==success)
 		printf("Expression is wrong");
 	else{
@@ -151,15 +161,17 @@ static int cmd_w(char *args){
 }
 
 static int cmd_d(char *args){
-	int n = atoi(args);
+	int n;
+	if(NULL==args){
+		printf("d N,例如：d 2");
+		return 0;
+	}
+	n = atoi(args);
 	for(free_=head;free_->NO != n;free_=free_->next)
 		;
-	while(free_->next!=NULL)
-	{
-		free_->NO=free_->next->NO;
+	while(free_->next!=NULL){
 		free_->address=free_->next->address;
 		free_->value=free_->next->value;
-		free_->next=free_->next->next;
 	}
 	return 0;
 }
