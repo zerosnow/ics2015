@@ -53,7 +53,7 @@ void createPostfixExpression(Token *infix)
 		case '*':
 			if(0==inCount || (infix[inCount-1].type == '(') || (infix[inCount-1].type == '+') ||
 				(infix[inCount-1].type == '-') || (infix[inCount-1].type == '*') ||
-				(infix[inCount-1].type == '/'))	//如果在最开始，则为取地址，如果前面为运算符，则为取地址
+				(infix[inCount-1].type == '/'||infix[inCount-1].type == ADDR))	//如果在最开始，则为取地址，如果前面为运算符，则为取地址
 			{
 				infix[inCount].type=ADDR;
 				if(top == -1 ||TokenStack[top].type=='+'||TokenStack[top].type=='-'||
