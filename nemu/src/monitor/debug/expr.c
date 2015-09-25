@@ -61,8 +61,30 @@ void init_token(){		//将token的type初始化为0方便之后的判断
 		tokens[i].type=0;
 }
 
+int hexToi(char *hex)
+{
+	int number=0;
+	int i=0;
+	if(hex[0]=='0'&&hex[1]=='x')
+		hex=hex+2;
+	while(hex[i]!='\0')
+	{
+		if(hex[i]>='0'&&hex[i]<='9')
+			number=number*16+hex[i]-'0';
+		else if(hex[i]>='a'&&hex[i]<='f')
+			number=number*16+hex[i]-'a';
+		else if(hex[i]>='A'&&hex[i]<='F')
+			number=number*16+hex[i]-'A';
+		else
+			return -1;
+		i++;
+	}
+	return number;
+}
+	
+
 static bool make_token(char *e) {
-	long int middleTran;
+	int middleTran;
 	int position = 0;
 	int i;
 	int j=0;	
@@ -120,9 +142,9 @@ static bool make_token(char *e) {
 						tokens[nr_token].str[substr_len]='\0';
 						printf("%s\n",tokens[nr_token].str);
 						nr_token++;
-						middleTran=strtol(tokens[nr_token].str, NULL, 16);
-						sprintf(tokens[nr_token].str, "%ld", middleTran);
-						printf("%ld\n",middleTran);
+						middleTran=hexToi(tokens[nr_token].str);
+						sprintf(tokens[nr_token].str, "%d", middleTran);
+						printf("%d\n",middleTran);
 						break;
 					default: 
 						tokens[nr_token].type=rules[i].token_type;
