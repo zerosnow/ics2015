@@ -95,7 +95,7 @@ static bool make_token(char *e) {
 						for(j=0;j<8;j++)
 						{
 							
-							printf("%d\n",j);
+							printf("%d:%s,%s\n",j,tokens[nr_token].str,reg_name[j]);
 							if(0 == strcmp(tokens[nr_token].str,reg_name[j]))
 							{
 								printf("%d\n",j);
