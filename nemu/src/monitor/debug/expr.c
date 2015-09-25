@@ -140,6 +140,7 @@ static bool make_token(char *e) {
 						strncpy(tokens[nr_token].str, substr_start, substr_len);
 						tokens[nr_token].str[substr_len]='\0';
 						sprintf(tokens[nr_token].str, "%d", hexToi(tokens[nr_token].str));
+						tokens[nr_token].type=NUM;
 						nr_token++;
 						break;
 					default: 
@@ -169,6 +170,7 @@ uint32_t expr(char *e, bool *success) {
 		*success = false;
 		return 0;
 	}
+
 	createPostfixExpression(tokens);
 	return calPostfixExpression();
 }
