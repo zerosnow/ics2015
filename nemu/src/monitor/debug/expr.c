@@ -99,6 +99,7 @@ static bool make_token(char *e) {
 								tokens[nr_token].type = NUM;
 								break;
 							}
+						printf("%d\n",j);
 						if(0 == strcmp(tokens[nr_token].str,"eip"))
 						{
 							sprintf(tokens[nr_token].str, "%d", cpu.gpr[i]._32);
