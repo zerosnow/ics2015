@@ -140,7 +140,7 @@ uint32_t expr(char *e, bool *success) {
 		printf("%d : %s",tokens[nr_token].type,tokens[nr_token].str);
 
 	/* TODO: Insert codes to evaluate the expression. */
-	panic("please implement me");
+//	panic("please implement me");
 	return 0;
 }
 
