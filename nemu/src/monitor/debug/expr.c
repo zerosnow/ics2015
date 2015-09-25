@@ -67,7 +67,6 @@ int hexToi(char *hex)
 	int i=0;
 	if(hex[0]=='0'&&hex[1]=='x')
 		hex=hex+2;
-	printf("%s\n",hex);
 	while(hex[i]!='\0')
 	{
 		if(hex[i]>='0'&&hex[i]<='9')
@@ -85,7 +84,6 @@ int hexToi(char *hex)
 	
 
 static bool make_token(char *e) {
-	int middleTran;
 	int position = 0;
 	int i;
 	int j=0;	
@@ -141,10 +139,7 @@ static bool make_token(char *e) {
 						tokens[nr_token].type=rules[i].token_type;
 						strncpy(tokens[nr_token].str, substr_start, substr_len);
 						tokens[nr_token].str[substr_len]='\0';
-						printf("%s\n",tokens[nr_token].str);
-						middleTran=hexToi(tokens[nr_token].str);
-						sprintf(tokens[nr_token].str, "%d", middleTran);
-						printf("%d\n",middleTran);
+						sprintf(tokens[nr_token].str, "%d", hexToi(tokens[nr_token].str));
 						nr_token++;
 						break;
 					default: 
@@ -168,7 +163,6 @@ static bool make_token(char *e) {
 }
 
 uint32_t expr(char *e, bool *success) {
-	int i=0;
 	init_token();
 	*success = true;
 	if(!make_token(e)) {
@@ -176,15 +170,6 @@ uint32_t expr(char *e, bool *success) {
 		return 0;
 	}
 	createPostfixExpression(tokens);
-	while(tokens[i].type!=0){
-		printf("%d:%s\n",tokens[i].type,tokens[i].str);
-		i++;
-	}
-	i=0;
-while(postfix[i].type!=0){
-		printf("%d:%s\n",postfix[i].type,postfix[i].str);
-		i++;
-	}
 	return calPostfixExpression();
 }
 
