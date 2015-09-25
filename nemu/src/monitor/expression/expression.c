@@ -11,14 +11,11 @@ void TokenPop(void)
 {
 	while(top>=0&&TokenStack[top].type!='(')
 	{
-		postCount++;
 		postfix[postCount].type=TokenStack[top].type;
 		strcpy(postfix[postCount].str,TokenStack[top].str);
 		top--;
 		postCount++;
 	}
-	if(-1==top)
-		postCount++;
 }
 
 void createPostfixExpression(Token *infix)
