@@ -128,6 +128,8 @@ static bool make_token(char *e) {
 			return false;
 		}
 	}
+	for(i=0;i<nr_token;i++)
+		printf("%d : %s",tokens[i].type,tokens[i].str);
 
 	return true; 
 }
@@ -139,7 +141,7 @@ uint32_t expr(char *e, bool *success) {
 		return 0;
 	}
 	for(i=0;i<nr_token;i++)
-		printf("%d : %s",tokens[nr_token].type,tokens[nr_token].str);
+		printf("%d : %s\n",tokens[i].type,tokens[i].str);
 
 	/* TODO: Insert codes to evaluate the expression. */
 //	panic("please implement me");
