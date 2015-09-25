@@ -170,7 +170,6 @@ uint32_t expr(char *e, bool *success) {
 		*success = false;
 		return 0;
 	}
-
 	createPostfixExpression(tokens);
 	return calPostfixExpression();
 }
