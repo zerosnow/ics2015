@@ -125,6 +125,7 @@ static int cmd_x(char *args){
 	if(NULL == csize||NULL == caddr)
 		printf("x N EXPR,例如:x 10 $eax");
 	else{
+		printf("%s\n",caddr);
 		addr = expr(caddr,&success);
 		if(false==success)
 			printf("Expression is wrong\n");
