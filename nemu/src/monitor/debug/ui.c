@@ -172,6 +172,7 @@ static int cmd_d(char *args){
 	while(free_->next!=NULL){
 		free_->address=free_->next->address;
 		free_->value=free_->next->value;
+		free_=free_->next;
 	}
 	return 0;
 }
