@@ -1,4 +1,5 @@
 #include "monitor/expression/expression.h"
+#include "memory/memory.h"
 
 void TokenPush(Token token)
 {
