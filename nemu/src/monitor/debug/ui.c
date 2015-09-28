@@ -109,12 +109,12 @@ static int cmd_p(char *args){
 	bool success;
 	int result;
 	if(NULL==args){
-		printf("p EXPR,例如:p 2+4");
+		printf("p EXPR,例如:p 2+4\n");
 		return 0;
 	}
 	result = expr(args,&success);
 	if(false==success)
-		printf("Expression is wrong");
+		printf("Expression is wrong\n");
 	else
 		printf("%d\n",result);
 	return 0;
@@ -128,7 +128,7 @@ static int cmd_x(char *args){
 	int i;
 	bool success;
 	if(NULL == csize||NULL == caddr)
-		printf("x N EXPR,例如:x 10 $eax");
+		printf("x N EXPR,例如:x 10 $eax\n");
 	else{
 		printf("%s\n",caddr);
 		addr = expr(caddr,&success);
@@ -145,12 +145,12 @@ static int cmd_w(char *args){
 	bool success;
 	int addr;
 	if(NULL==args){
-		printf("w EXPR,例如:w 5+2");
+		printf("w EXPR,例如:w 5+2\n");
 		return 0;
 	}
 	addr = expr(args,&success);
 	if(false==success)
-		printf("Expression is wrong");
+		printf("Expression is wrong\n");
 	else{
 		free_=head;
 		while(free_->address!=0)free_=free_->next;
@@ -163,14 +163,14 @@ static int cmd_w(char *args){
 static int cmd_d(char *args){
 	int n;
 	if(NULL==args){
-		printf("d N,例如：d 2");
+		printf("d N,例如：d 2\n");
 		return 0;
 	}
 	n = atoi(args);
 	if(true==delete_wp(n))
-		printf("delete successful");
+		printf("delete successful\n");
 	else
-		printf("delete failed,no this watchpoint or args error");
+		printf("delete failed,no this watchpoint or args error\n");
 	return 0;
 }
 
