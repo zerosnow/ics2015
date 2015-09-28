@@ -14,6 +14,7 @@ typedef struct watchpoint {
 } WP;
 
 void init_wp_list();
+bool delete_wp(int n);
 extern WP *head, *free_;
 
 #endif

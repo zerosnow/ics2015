@@ -20,6 +20,24 @@ void init_wp_list() {
 	free_ = NULL;
 }
 
+bool delete_wp(int n){
+	if(n>=0&&n<NR_WP){
+		free_ = &wp_list[n];
+		if(0==free_->address)
+			return false;
+		while(free_->next!=NULL){
+			free_->address=free_->next->address;
+			free_->value=free_->next->value;
+			free_=free_->next;
+		}
+		return true;
+	}
+	else 
+		return false;
+}
+
+	
+
 /* TODO: Implement the functionality of watchpoint */
 
 

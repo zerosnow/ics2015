@@ -167,13 +167,10 @@ static int cmd_d(char *args){
 		return 0;
 	}
 	n = atoi(args);
-	for(free_=head;free_->NO != n;free_=free_->next)
-		;
-	while(free_->next!=NULL){
-		free_->address=free_->next->address;
-		free_->value=free_->next->value;
-		free_=free_->next;
-	}
+	if(true==delete_wp(n))
+		printf("delete successful");
+	else
+		printf("delete failed,no this watchpoint or args error");
 	return 0;
 }
 
