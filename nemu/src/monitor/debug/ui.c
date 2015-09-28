@@ -142,21 +142,11 @@ static int cmd_x(char *args){
 }
 
 static int cmd_w(char *args){
-	bool success;
-	int addr;
 	if(NULL==args){
 		printf("w EXPR,例如:w 5+2\n");
 		return 0;
 	}
-	addr = expr(args,&success);
-	if(false==success)
-		printf("Expression is wrong\n");
-	else{
-		free_=head;
-		while(free_->address!=0)free_=free_->next;
-		free_->address=addr;
-		free_->value=swaddr_read(addr,4);
-	}	
+	add_wp(args);
 	return 0;
 }
 

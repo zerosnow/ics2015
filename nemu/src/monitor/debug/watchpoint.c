@@ -1,5 +1,6 @@
 #include "monitor/watchpoint.h"
 #include "monitor/expr.h"
+#include "memory/memory.h"
 
 #define NR_WP 32
 
@@ -19,6 +20,21 @@ void init_wp_list() {
 	head = wp_list;
 	free_ = NULL;
 }
+
+void add_wp(char *args){
+	bool success;
+	int addr;
+	addr = expr(args,&success);
+	if(false==success)
+		printf("Expression is wrong\n");
+	else{
+		free_=head;
+		while(free_->address!=0)free_=free_->next;
+		free_->address=addr;
+		free_->value=swaddr_read(addr,4);
+	}
+}
+
 
 bool delete_wp(int n){
 	if(n>=0&&n<NR_WP){
