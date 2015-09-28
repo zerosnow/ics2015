@@ -73,7 +73,7 @@ void cpu_exec(volatile uint32_t n) {
 		}
 #endif
 
-		if(true==check_wp()&&stopPoint!=cpu.eip){
+		if(stopPoint!=cpu.eip&&true==check_wp()){
 			stopPoint = cpu.eip;
 			nemu_state = STOP;
 		}
