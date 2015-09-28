@@ -11,7 +11,6 @@
 #define MAX_INSTR_TO_PRINT 20
 
 int nemu_state = STOP;
-
 int exec(swaddr_t);
 
 char assembly[80];
@@ -37,6 +36,7 @@ void do_int3() {
 
 /* Simulate how the CPU works. */
 void cpu_exec(volatile uint32_t n) {
+	int stopPoint=0;
 	if(nemu_state == END) {
 		printf("Program execution has ended. To restart the program, exit NEMU and run again.\n");
 		return;
@@ -73,8 +73,11 @@ void cpu_exec(volatile uint32_t n) {
 		}
 #endif
 
-		/* TODO: check watchpoints here. */
-		if(true==check_wp()) nemu_state = STOP;
+		if(true==check_wp()&&stopPoint!=cpu.eip){
+			stopPoint = cpu.eip;
+			nemu_state = STOP;
+		}
+
 		if(nemu_state != RUNNING) { return; }
 	}
 
