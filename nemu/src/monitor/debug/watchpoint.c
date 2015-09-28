@@ -61,6 +61,7 @@ bool check_wp(){
 	for(free_=head;free_->address!=0;free_=free_->next)
 	{
 		if(free_->value!=swaddr_read(free_->address,4)){
+			free_->value=swaddr_read(free_->address,4);
 			printf("breakpoint:%d    %08x:%8d\n",free_->NO,free_->address,free_->value);
 			isChanged=true;
 		}
