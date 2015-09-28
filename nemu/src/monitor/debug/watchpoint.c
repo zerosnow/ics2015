@@ -35,7 +35,6 @@ void add_wp(char *args){
 	}
 }
 
-
 bool delete_wp(int n){
 	if(n>=0&&n<NR_WP){
 		free_ = &wp_list[n];
@@ -51,6 +50,12 @@ bool delete_wp(int n){
 	else 
 		return false;
 }
+
+void print_wp(){
+	for(free_=head;free_->address!=0;free_=free_->next)
+		printf("%d,%x:%d\n",free_->NO,free_->address,free_->value);
+}
+
 
 	
 
