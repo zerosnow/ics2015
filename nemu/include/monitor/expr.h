@@ -12,6 +12,7 @@ enum {
 typedef struct token {
 	int type;
 	char str[32];
+	int priority;
 } Token;
 
 #endif

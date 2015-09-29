@@ -11,25 +11,26 @@
 static struct rule {
 	char *regex;
 	int token_type;
+	int priority;
 } rules[] = {
 
 	/* TODO: Add more rules.
 	 * Pay attention to the precedence level of different rules.
 	 */
 
-	{" +",	NOTYPE},				// spaces
-	{"==", EQU},
-	{"\\!=", UNEQU},
-	{"\\&\\&", AND},
-	{"\\|\\|", OR},
-	{"\\!", NOT},
-	{"\\+", '+'},					// plus
-	{"\\-", '-'},
-	{"\\*", '*'},
-	{"\\/", '/'},
-	{"^0x[0-9a-fA-F]+",HEX},
-	{"^[0-9]+",NUM},					//number
-	{"^\\$[a-z]+",REG},					//register
+	{" +",	NOTYPE, 0},				// spaces
+	{"==", EQU, 7},
+	{"\\!=", UNEQU, 7},
+	{"\\&\\&", AND, 11},
+	{"\\|\\|", OR, 12},
+	{"\\!", NOT, 2},
+	{"\\+", '+', 4},					// plus
+	{"\\-", '-', 4},
+	{"\\*", '*', 3},
+	{"\\/", '/', 3},
+	{"^0x[0-9a-fA-F]+",HEX, 0},
+	{"^[0-9]+",NUM, 0},					//number
+	{"^\\$[a-z]+",REG, 0},					//register
 	{"\\(", '('},	
 	{"\\)", ')'}
 	
@@ -138,15 +139,22 @@ static bool make_token(char *e) {
 							panic("register is error");
 							return false;
 						}
+						tokens[nr_token].priority=rules[i].priority;
 						nr_token++;
 						break;
 					case '*':
 						if(0==nr_token||'('==tokens[nr_token-1].type||'+'==tokens[nr_token-1].type
 							||'-'==tokens[nr_token-1].type||'*'==tokens[nr_token-1].type
 							||'/'==tokens[nr_token-1].type)
+						{
 							tokens[nr_token].type=ADDR;
+							tokens[nr_token].priority=2;
+						}
 						else
+						{
 							tokens[nr_token].type=rules[i].token_type;
+							tokens[nr_token].priority=rules[i].priority;
+						}
 						strncpy(tokens[nr_token].str, substr_start, substr_len);
 						tokens[nr_token].str[substr_len]='\0';
 						nr_token++;
@@ -155,9 +163,15 @@ static bool make_token(char *e) {
 						if(0==nr_token||'('==tokens[nr_token-1].type||'+'==tokens[nr_token-1].type
 							||'-'==tokens[nr_token-1].type||'*'==tokens[nr_token-1].type
 							||'/'==tokens[nr_token-1].type)
+						{
 							tokens[nr_token].type=MINUS;
+							tokens[nr_token].priority=2;
+						}
 						else
+						{
 							tokens[nr_token].type=rules[i].token_type;
+							tokens[nr_token].priority=rules[i].priority;
+						}
 						strncpy(tokens[nr_token].str, substr_start, substr_len);
 						tokens[nr_token].str[substr_len]='\0';
 						nr_token++;
@@ -167,10 +181,12 @@ static bool make_token(char *e) {
 						strncpy(tokens[nr_token].str, substr_start, substr_len);
 						tokens[nr_token].str[substr_len]='\0';
 						sprintf(tokens[nr_token].str, "%d", hexToi(tokens[nr_token].str));
+						tokens[nr_token].priority=rules[i].priority;
 						tokens[nr_token].type=NUM;
 						nr_token++;
 						break;
 					default: 
+						tokens[nr_token].priority=rules[i].priority;
 						tokens[nr_token].type=rules[i].token_type;
 						strncpy(tokens[nr_token].str, substr_start, substr_len);
 						tokens[nr_token].str[substr_len]='\0';
@@ -190,6 +206,13 @@ static bool make_token(char *e) {
 	return true; 
 }
 
+void scanToken(){
+	int i;
+	for(i=0;i<nr_token;i++){
+		printf("%d,%s,%d\n",tokens[i].type,tokens[i].str,tokens[i].priority);
+	}
+}
+
 uint32_t expr(char *e, bool *success) {
 	init_token();
 	*success = true;
@@ -197,6 +220,7 @@ uint32_t expr(char *e, bool *success) {
 		*success = false;
 		return 0;
 	}
+	scanToken();	
 	createPostfixExpression(tokens);
 	return calPostfixExpression();
 }
