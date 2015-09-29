@@ -135,8 +135,18 @@ static bool make_token(char *e) {
 						}
 						nr_token++;
 						break;
+					case '*':
+						if(0==nr_token||'('==tokens[nr_token-1].type||'+'==tokens[nr_token-1].type
+							||'-'==tokens[nr_token-1].type||'*'==tokens[nr_token-1].type
+							||'/'==tokens[nr_token-1].type)
+							tokens[nr_token].type=ADDR;
+						else
+							tokens[nr_token].type=rules[i].token_type;
+						strncpy(tokens[nr_token].str, substr_start, substr_len);
+						tokens[nr_token].str[substr_len]='\0';
+						nr_token++;
+						break;
 					case HEX:
-						tokens[nr_token].type=rules[i].token_type;
 						strncpy(tokens[nr_token].str, substr_start, substr_len);
 						tokens[nr_token].str[substr_len]='\0';
 						sprintf(tokens[nr_token].str, "%d", hexToi(tokens[nr_token].str));

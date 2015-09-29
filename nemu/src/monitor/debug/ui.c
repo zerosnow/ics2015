@@ -137,7 +137,7 @@ static int cmd_x(char *args){
 
 static int cmd_w(char *args){
 	if(NULL==args){
-		printf("w EXPR,例如:w 5+2\n");
+		printf("w EXPR,例如:w $eax+2\n");
 		return 0;
 	}
 	add_wp(args);
