@@ -5,6 +5,7 @@ void TokenPush(Token token)
 {
 	top++;
 	TokenStack[top].type=token.type;
+	TokenStack[top].priority=token.priority;
 	strcpy(TokenStack[top].str,token.str);
 }
 
@@ -13,6 +14,7 @@ void TokenPop(void)
 	while(top>=0&&TokenStack[top].type!='(')
 	{
 		postfix[postCount].type=TokenStack[top].type;
+		postfix[postCount].priority=TokenStack[top].priority;
 		strcpy(postfix[postCount].str,TokenStack[top].str);
 		top--;
 		postCount++;
@@ -24,6 +26,7 @@ void TokenPopOne(void)
 	if(top>=0)
 	{
 		postfix[postCount].type=TokenStack[top].type;
+		postfix[postCount].priority=TokenStack[top].priority;
 		strcpy(postfix[postCount].str,TokenStack[top].str);
 		top--;
 		postCount++;
@@ -44,25 +47,21 @@ void createPostfixExpression(Token *infix)
 		{
 		case NUM:
 			postfix[postCount].type=infix[inCount].type;
+			postfix[postCount].priority=infix[inCount].priority;
 			strcpy(postfix[postCount].str,infix[inCount].str);
 			postCount++;
 			break;
-		case '+':case '-':
-			TokenPop();
-			TokenPush(infix[inCount]);
-			break;
-		case ADDR:	
-			TokenPush(infix[inCount]);
-			break;
-		case '/':case '*':
-			if(TokenStack[top].type=='+'||TokenStack[top].type=='-')
+		case '+': case '-': case '*': case '/': case EQU: case UNEQU: case AND: case OR: 
+			if(TokenStack[top].priority<infix[inCount].priority)
 				TokenPush(infix[inCount]);
-			else
-			{
-				while(TokenStack[top].type!='+'&&TokenStack[top].type!='-'&&top>=0)
+			else{
+				while(TokenStack[top].priority>=infix[inCount].priority&&top>=0)
 					TokenPopOne();
 				TokenPush(infix[inCount]);
 			}
+			break;
+		case ADDR: case MINUS: case NOT:
+			TokenPush(infix[inCount]);
 			break;
 		case '(':
 			TokenPush(infix[inCount]);
