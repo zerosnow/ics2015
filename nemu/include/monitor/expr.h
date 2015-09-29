@@ -6,7 +6,7 @@
 uint32_t expr(char *, bool *);
 
 enum {
-	NOTYPE = 256, NUM, HEX, REG, ADDR
+	NOTYPE = 256, NUM, HEX, REG, ADDR, MINUS, EQU, UNEQU, AND, OR, NOT
 };
 
 typedef struct token {
