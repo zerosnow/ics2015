@@ -27,7 +27,6 @@ void add_wp(char *args){
 	bool success;
 	int value;
 	value = expr(args,&success);
-	printf("1111");
 	if(false==success)
 		printf("Expression is wrong\n");
 	else{

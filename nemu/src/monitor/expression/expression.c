@@ -51,17 +51,10 @@ void createPostfixExpression(Token *infix)
 			TokenPop();
 			TokenPush(infix[inCount]);
 			break;
-		case '*':
-			if(0==inCount || (infix[inCount-1].type == '(') || (infix[inCount-1].type == '+') ||
-				(infix[inCount-1].type == '-') || (infix[inCount-1].type == '*') ||
-				(infix[inCount-1].type == '/'||infix[inCount-1].type == ADDR))	//如果在最开始，则为取地址，如果前面为运算符，则为取地址
-			{
-				infix[inCount].type=ADDR;
-				TokenPush(infix[inCount]);
-				break;
-			}
-			//其他情况作为乘号直接往下运行
-		case '/':
+		case ADDR:	
+			TokenPush(infix[inCount]);
+			break;
+		case '/':case '*':
 			if(TokenStack[top].type=='+'||TokenStack[top].type=='-')
 				TokenPush(infix[inCount]);
 			else
