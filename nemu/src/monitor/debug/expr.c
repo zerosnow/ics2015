@@ -205,13 +205,13 @@ static bool make_token(char *e) {
 	}
 	return true; 
 }
-
+/*
 void scanToken(){
 	int i;
 	for(i=0;i<nr_token;i++){
 		printf("%d,%s,%d\n",postfix[i].type,postfix[i].str,postfix[i].priority);
 	}
-}
+}*/
 
 uint32_t expr(char *e, bool *success) {
 	init_token();
@@ -221,7 +221,6 @@ uint32_t expr(char *e, bool *success) {
 		return 0;
 	}
 	createPostfixExpression(tokens);
-	scanToken();
 	return calPostfixExpression();
 }
 
