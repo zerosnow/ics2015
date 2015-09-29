@@ -62,7 +62,7 @@ bool check_wp(){
 	bool isChanged=false;
 	bool success;
 	uint32_t value;
-	for(free_=head;free_->args!='\0';free_=free_->next)
+	for(free_=head;free_->args[0]!='\0';free_=free_->next)
 	{
 		value=expr(free_->args,&success);
 		if(free_->value!=value && true==success){
