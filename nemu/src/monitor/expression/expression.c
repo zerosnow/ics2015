@@ -52,10 +52,10 @@ void createPostfixExpression(Token *infix)
 			postCount++;
 			break;
 		case '+': case '-': case '*': case '/': case EQU: case UNEQU: case AND: case OR: 
-			if(TokenStack[top].priority<infix[inCount].priority)
+			if(TokenStack[top].priority>infix[inCount].priority)
 				TokenPush(infix[inCount]);
 			else{
-				while(TokenStack[top].priority>=infix[inCount].priority&&top>=0)
+				while(TokenStack[top].priority<=infix[inCount].priority&&top>=0)
 					TokenPopOne();
 				TokenPush(infix[inCount]);
 			}
