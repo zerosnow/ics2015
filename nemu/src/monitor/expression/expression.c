@@ -125,6 +125,28 @@ int calPostfixExpression(void)
 				return -1;
 			}
 			break;
+		case EQU:
+			right_oprand=intPop();
+			intPush(intPop()==right_oprand);
+			break;
+		case UNEQU:
+			right_oprand=intPop();
+			intPush(intPop()!=right_oprand);
+			break;
+		case AND:
+			right_oprand=intPop();
+			intPush(intPop()&&right_oprand);
+			break;
+		case OR:
+			right_oprand=intPop();
+			intPush(intPop()||right_oprand);
+			break;
+		case NOT:
+			intPush(!intPop());
+			break;
+		case MINUS:
+			intPush(0-intPop());
+			break;
 		case ADDR:
 			intPush(swaddr_read(intPop(),4));
 			break;
