@@ -145,7 +145,8 @@ static bool make_token(char *e) {
 					case '*':
 						if(0==nr_token||'('==tokens[nr_token-1].type||'+'==tokens[nr_token-1].type
 							||'-'==tokens[nr_token-1].type||'*'==tokens[nr_token-1].type
-							||'/'==tokens[nr_token-1].type)
+							||'/'==tokens[nr_token-1].type||MINUS==tokens[nr_token-1].type||
+							ADDR==tokens[nr_token-1].type)
 						{
 							tokens[nr_token].type=ADDR;
 							tokens[nr_token].priority=2;
@@ -162,7 +163,8 @@ static bool make_token(char *e) {
 					case '-':
 						if(0==nr_token||'('==tokens[nr_token-1].type||'+'==tokens[nr_token-1].type
 							||'-'==tokens[nr_token-1].type||'*'==tokens[nr_token-1].type
-							||'/'==tokens[nr_token-1].type)
+							||'/'==tokens[nr_token-1].type||MINUS==tokens[nr_token-1].type||
+							ADDR==tokens[nr_token-1].type)
 						{
 							tokens[nr_token].type=MINUS;
 							tokens[nr_token].priority=2;
