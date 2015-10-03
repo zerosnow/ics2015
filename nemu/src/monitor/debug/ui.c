@@ -126,6 +126,7 @@ static int cmd_x(char *args){
 	else{
 		printf("%s\n",caddr);
 		addr = expr(caddr,&success);
+		addr = addr?((addr-1)/4+1)*4:0;
 		if(false==success)
 			printf("Expression is wrong\n");
 		else

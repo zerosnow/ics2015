@@ -148,7 +148,9 @@ int calPostfixExpression(void)
 			intPush(0-intPop());
 			break;
 		case ADDR:
-			intPush(swaddr_read(intPop(),4));
+			right_oprand=intPop();
+			right_oprand=right_oprand?((right_oprand-1)/4+1)*4:0;
+			intPush(swaddr_read(right_oprand,4));
 			break;
 		default:
 			printf("illegal input\n");
