@@ -223,7 +223,7 @@ uint32_t expr(char *e, bool *success) {
 	}
 	createPostfixExpression(tokens);
 	while(postfix[i].type!=0){
-		printf("%d,%s,%d",postfix[i].type,postfix[i].str,postfix[i].priority);
+		printf("%d,%s,%d\n",postfix[i].type,postfix[i].str,postfix[i].priority);
 		i++;
 	}
 	return calPostfixExpression();
