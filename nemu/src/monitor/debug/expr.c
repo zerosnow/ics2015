@@ -216,7 +216,7 @@ void scanToken(){
 }*/
 
 uint32_t expr(char *e, bool *success) {
-	int i=0;
+	//int i=0;
 	init_token();
 	*success = true;
 	if(!make_token(e)) {
@@ -224,10 +224,10 @@ uint32_t expr(char *e, bool *success) {
 		return 0;
 	}
 	createPostfixExpression(tokens);
-	while(postfix[i].type!=0){
+/*	while(postfix[i].type!=0){
 		printf("%d,%s,%d\n",postfix[i].type,postfix[i].str,postfix[i].priority);
 		i++;
-	}
+	}*/
 	return calPostfixExpression();
 }
 
