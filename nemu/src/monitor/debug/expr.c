@@ -131,7 +131,7 @@ static bool make_token(char *e) {
 						}
 						if(0 == strcmp(tokens[nr_token].str,"eip"))
 						{
-							sprintf(tokens[nr_token].str, "%d", cpu.gpr[i]._32);
+							sprintf(tokens[nr_token].str, "%d", cpu.eip);
 							tokens[nr_token].type = NUM;
 						}
 						else if(8 == j)
