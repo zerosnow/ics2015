@@ -81,15 +81,15 @@ static int cmd_info(char *args){
 		printf("info r 打印寄存器状态, info w 打印监视点信息\n");
 	else{
 		if('r' == args[0]){
-			printf("cpu.eax = %d\n", cpu.eax);
-			printf("cpu.ebx = %d\n", cpu.ebx);
-			printf("cpu.ecx = %d\n", cpu.ecx);
-			printf("cpu.edx = %d\n", cpu.edx);
-			printf("cpu.esp = %d\n", cpu.esp);
-			printf("cpu.ebp = %d\n", cpu.ebp);
-			printf("cpu.esi = %d\n", cpu.esi);
-			printf("cpu.edi = %d\n", cpu.edi);
-			printf("cpu.eip = %d\n", cpu.eip);
+			printf("cpu.eax = %x\n", cpu.eax);
+			printf("cpu.ebx = %x\n", cpu.ebx);
+			printf("cpu.ecx = %x\n", cpu.ecx);
+			printf("cpu.edx = %x\n", cpu.edx);
+			printf("cpu.esp = %x\n", cpu.esp);
+			printf("cpu.ebp = %x\n", cpu.ebp);
+			printf("cpu.esi = %x\n", cpu.esi);
+			printf("cpu.edi = %x\n", cpu.edi);
+			printf("cpu.eip = %x\n", cpu.eip);
 		}
 		else if('w' == args[0])
 			print_wp();
