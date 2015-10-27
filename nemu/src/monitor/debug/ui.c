@@ -96,6 +96,13 @@ static int cmd_info(char *args){
 		else  if ('e' == args[0])
 		{
 			printf("EFLAGS = 0x%08x\n", cpu.eflags);
+			printf("CF = %d\n", cpu.eflags & 0x1);
+			printf("PF = %d\n", (cpu.eflags>>2) & 0x1);
+			printf("ZF = %d\n", (cpu.eflags>>6) & 0x1);
+			printf("SF = %d\n", (cpu.eflags>>7) & 0x1);
+			printf("IF = %d\n", (cpu.eflags>>9) & 0x1);
+			printf("DF = %d\n", (cpu.eflags>>10) & 0x1);
+			printf("OF = %d\n", (cpu.eflags>>11) & 0x1);
 		}
 		else
 			printf("info r 打印寄存器状态, info w 打印监视点信息\n");
