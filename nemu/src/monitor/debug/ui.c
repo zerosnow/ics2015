@@ -98,6 +98,7 @@ static int cmd_info(char *args){
 			printf("EFLAGS = 0x%08x\n", cpu.eflags);
 			printf("CF           = %d\n", cpu.eflags & 0x1);
 			printf("PF           = %d\n", (cpu.eflags>>2) & 0x1);
+			printf("AF           = %d\n", (cpu.eflags>>4) & 0x1);
 			printf("ZF           = %d\n", (cpu.eflags>>6) & 0x1);
 			printf("SF           = %d\n", (cpu.eflags>>7) & 0x1);
 			printf("IF           = %d\n", (cpu.eflags>>9) & 0x1);
