@@ -95,7 +95,7 @@ static int cmd_info(char *args){
 			print_wp();
 		else  if ('e' == args[0])
 		{
-			printf("EFLAGS = %x\n", cpu.eflags);
+			printf("EFLAGS = 0x%8x\n", cpu.eflags);
 		}
 		else
 			printf("info r 打印寄存器状态, info w 打印监视点信息\n");
