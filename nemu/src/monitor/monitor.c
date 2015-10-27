@@ -23,6 +23,10 @@ static void welcome() {
 			exec_file);
 }
 
+static void init_eflags() {
+	cpu.eflags = 0x00000002;
+}
+
 void init_monitor(int argc, char *argv[]) {
 	/* Perform some global initialization */
 
@@ -80,6 +84,8 @@ void restart() {
 	/* Read the file with name `argv[1]' into ramdisk. */
 	init_ramdisk();
 #endif
+	/*initial EFLAGS*/
+	init_eflags();
 
 	/* Read the entry code into memory. */
 	load_entry();

@@ -51,7 +51,7 @@ static struct {
 	{ "c", "Continue the execution of the program", cmd_c },
 	{ "q", "Exit NEMU", cmd_q },
 	{ "si", "single step si for 1 step and si n for n step", cmd_si },
-	{ "info", "info r 打印寄存器状态, info w 打印监视点信息", cmd_info },
+	{ "info", "info r 打印寄存器状态, info w 打印监视点信息, info e print eflags", cmd_info },
 	{ "p", "表达式求值, 示例:p $eax+1", cmd_p},
 	{ "x", "扫描内存,x N EXPR, 以16进制输出EXPR后N个4字节单元", cmd_x },
 	{ "w", "设置监视点,示例w *0x2000,当表达式的值发生变化时停止执行", cmd_w },
@@ -93,7 +93,11 @@ static int cmd_info(char *args){
 		}
 		else if('w' == args[0])
 			print_wp();
-		else 
+		else  if ('e' == args[0])
+		{
+			printf("EFLAGS = %x\n", cpu.eflags);
+		}
+		else
 			printf("info r 打印寄存器状态, info w 打印监视点信息\n");
 	}
 	return 0;
