@@ -6,6 +6,7 @@
 
 #include "jump/call.h"
 #include "jump/je.h"
+#include "jump/jmp.h"
 
 #include "arith/dec.h"
 #include "arith/inc.h"
