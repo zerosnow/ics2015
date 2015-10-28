@@ -17,6 +17,7 @@
 #include "arith/sub.h"
 #include "arith/test.h"
 #include "arith/cmp.h"
+#include "arith/add.h"
 
 #include "logic/and.h"
 #include "logic/or.h"
