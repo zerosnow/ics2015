@@ -5,9 +5,12 @@
 static void do_execute() {
 	cpu.esp -=4;
 	MEM_W(cpu.esp, cpu.eip);
-	cpu.eip += op_src->addr;
-	#if DATA_BYTE == 2
-		cpu.eip = cpu.eip & 0x0000ffff;
+	#if DATA_BYTE == 1
+		cpu.eip = (cpu.eip & 0xffffff00)| (((cpu.eip & 0xff) + (op_src->addr & 0xff)) & 0xff);
+	#elif DATA_BYTE == 2
+		cpu.eip = (cpu.eip & 0xffff0000)| (((cpu.eip & 0xffff) + (op_src->addr & 0xffff)) & 0xffff);
+	#else
+		cpu.eip += op_src->addr;
 	#endif
 	print_asm_template1();
 }

@@ -5,11 +5,12 @@
 static void do_execute() {
 	if (cpu.CF == 1 || cpu.ZF == 1)
 	{
-		cpu.eip += op_src->addr;
 		#if DATA_BYTE == 1
-			cpu.eip &= 0x000000ff;
+			cpu.eip = (cpu.eip & 0xffffff00)| (((cpu.eip & 0xff) + (op_src->addr & 0xff)) & 0xff);
 		#elif DATA_BYTE == 2
-			cpu.eip &= 0x0000ffff;
+			cpu.eip = (cpu.eip & 0xffff0000)| (((cpu.eip & 0xffff) + (op_src->addr & 0xffff)) & 0xffff);
+		#else
+			cpu.eip += op_src->addr;
 		#endif
 	}
 	print_asm_template1();
