@@ -9,6 +9,7 @@
 #include "jump/jbe.h"
 #include "jump/jmp.h"
 #include "jump/leave.h"
+#include "jump/ret.h"
 
 #include "arith/dec.h"
 #include "arith/inc.h"
