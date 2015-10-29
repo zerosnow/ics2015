@@ -7,9 +7,16 @@
 #include "jump/call.h"
 #include "jump/je.h"
 #include "jump/jbe.h"
+#include "jump/ja.h"
+#include "jump/jae.h"
+#include "jump/jl.h"
+#include "jump/jle.h"
+#include "jump/jg.h"
+#include "jump/jge.h"
 #include "jump/jmp.h"
 #include "jump/leave.h"
 #include "jump/ret.h"
+
 
 #include "arith/dec.h"
 #include "arith/inc.h"
