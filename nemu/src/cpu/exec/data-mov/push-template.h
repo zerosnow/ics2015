@@ -11,9 +11,6 @@ static void do_execute () {
 		MEM_W(cpu.esp, op_src->val);
 	#endif
 
-	/* TODO: Update EFLAGS. */
-	//panic("please implement me");
-
 	print_asm_template1();
 }
 
