@@ -23,6 +23,9 @@ extern char assembly[];
 #define print_asm(...)
 #endif
 
+#define print_asm_template0() \
+	print_asm(str(instr) str(SUFFIX) " ")
+
 #define print_asm_template1() \
 	print_asm(str(instr) str(SUFFIX) " %s", op_src->str)
 
