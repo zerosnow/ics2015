@@ -12,4 +12,3 @@
 
 #undef MSB
 
-#undef SIGN_EXTEND

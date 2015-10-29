@@ -34,4 +34,3 @@
 
 #define MSB(n) ((DATA_TYPE)(n) >> ((DATA_BYTE << 3) - 1))
 
-#define SIGN_EXTEND(n)  (MSB(n)?-n:n)
