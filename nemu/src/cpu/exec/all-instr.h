@@ -3,9 +3,11 @@
 #include "data-mov/mov.h"
 #include "data-mov/xchg.h"
 #include "data-mov/push.h"
+#include "data-mov/pop.h"
 
 #include "jump/call.h"
 #include "jump/je.h"
+#include "jump/jne.h"
 #include "jump/jbe.h"
 #include "jump/ja.h"
 #include "jump/jae.h"
