@@ -9,7 +9,7 @@ make_helper(ret) {
 	cpu.esp +=4;
 	print_asm_template1();
 	
-	return 1;
+	return 5;
 }
 
 #include "cpu/exec/template-end.h"
