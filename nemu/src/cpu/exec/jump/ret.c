@@ -5,6 +5,7 @@
 
 make_helper(ret) {
 	cpu.eip = MEM_R(cpu.esp);
+	printf("111111111111%x\n", cpu.eip);
 	cpu.esp +=4;
 	print_asm_template1();
 	
