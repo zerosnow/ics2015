@@ -10,6 +10,7 @@ static void do_execute () {
 		cpu.esp -= 4;
 		MEM_W(cpu.esp, op_src->val);
 		printf("%x\n%x\n", op_src->val, cpu.ebp);
+		printf("%x\n%x\n", op_src->val, cpu.esi);
 	#endif
 
 	print_asm_template1();
