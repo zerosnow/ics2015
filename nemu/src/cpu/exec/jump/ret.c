@@ -4,8 +4,9 @@
 #define instr ret
 
 make_helper(ret) {
-	cpu.esp +=4;
-	cpu.eip = MEM_R(cpu.esp);
+	//cpu.esp +=4;
+	//cpu.eip = MEM_R(cpu.esp);
+	cpu.eip = cpu.ebp;
 	print_asm_template1();
 	
 	return 1;
