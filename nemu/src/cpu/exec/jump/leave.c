@@ -1,6 +1,7 @@
 #define DATA_BYTE 4
 #include "cpu/exec/template-start.h"
 
+#define instr leave
 
 make_helper(leave) {
 	cpu.esp = cpu.ebp;
