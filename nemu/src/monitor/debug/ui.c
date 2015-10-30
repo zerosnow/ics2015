@@ -45,6 +45,7 @@ static int cmd_p(char *args);
 static int cmd_x(char *args);
 static int cmd_w(char *args);
 static int cmd_d(char *args);
+static int cmd_bt(char *args);
 
 static struct {
 	char *name;
@@ -55,18 +56,20 @@ static struct {
 	{ "c", "Continue the execution of the program", cmd_c },
 	{ "q", "Exit NEMU", cmd_q },
 	{ "si", "single step si for 1 step and si n for n step", cmd_si },
-	{ "info", "info r 打印寄存器状态, info w 打印监视点信息, info e print eflags", cmd_info },
+	{ "info", "info r 打印寄存器状态, info w 打印监视点信息, info e 打印标志寄存器信息\ninfo f 打印符号表\n", cmd_info },
 	{ "p", "表达式求值, 示例:p $eax+1", cmd_p},
 	{ "x", "扫描内存,x N EXPR, 以16进制输出EXPR后N个4字节单元", cmd_x },
 	{ "w", "设置监视点,示例w *0x2000,当表达式的值发生变化时停止执行", cmd_w },
-	{ "d", "删除监视点,示例d N, 删除监视点序号为N的监视点", cmd_d }
+	{ "d", "删除监视点,示例d N, 删除监视点序号为N的监视点", cmd_d },
+	{ "bt", "打印栈帧链", cmd_bt}
+
 	/* TODO: Add more commands */
 
 };
 
 #define NR_CMD (sizeof(cmd_table) / sizeof(cmd_table[0]))
 
-static int cmd_si(char *args){
+static int cmd_si(char *args) {
 	int number = 0;
 	if(NULL == args)
 		cpu_exec(1);
@@ -80,7 +83,7 @@ static int cmd_si(char *args){
 	return 0;
 }
 
-static int cmd_info(char *args){
+static int cmd_info(char *args) {
 	int i;
 	if(NULL == args)
 		printf("info r 打印寄存器状态, info w 打印监视点信息, info e 打印标志寄存器信息\ninfo f 打印符号表\n");
@@ -122,7 +125,7 @@ static int cmd_info(char *args){
 	return 0;
 }
 
-static int cmd_p(char *args){
+static int cmd_p(char *args) {
 	bool success;
 	int result;
 	if(NULL==args){
@@ -137,7 +140,7 @@ static int cmd_p(char *args){
 	return 0;
 }
 
-static int cmd_x(char *args){
+static int cmd_x(char *args) {
 	char *csize = strtok(args, " ");
 	char *caddr = csize+strlen(csize)+1;
 	int size = atoi(csize);
@@ -159,7 +162,7 @@ static int cmd_x(char *args){
 	return 0;
 }
 
-static int cmd_w(char *args){
+static int cmd_w(char *args) {
 	if(NULL==args){
 		printf("w EXPR,例如:w $eax+2\n");
 		return 0;
@@ -168,7 +171,7 @@ static int cmd_w(char *args){
 	return 0;
 }
 
-static int cmd_d(char *args){
+static int cmd_d(char *args) {
 	int n;
 	if(NULL==args){
 		printf("d N,例如：d 2\n");
@@ -179,6 +182,26 @@ static int cmd_d(char *args){
 		printf("delete successful\n");
 	else
 		printf("delete failed,no this watchpoint or args error\n");
+	return 0;
+}
+
+static int cmd_bt(char *args) {
+	uint32_t temp_ebp = cpu.ebp;
+	uint32_t temp_esp = cpu.esp;
+	if (args != NULL) {
+		printf("bt, 打印栈帧链");
+		return 0;
+	}
+	while(temp_ebp != 0) {
+		if (temp_esp != temp_ebp) {
+			printf("%x\n", swaddr_read(temp_esp, 4));
+			temp_esp +=4;
+		}
+		else {
+			temp_ebp = swaddr_read(temp_esp, 4);
+			temp_esp +=4;
+		}	
+	}
 	return 0;
 }
 
