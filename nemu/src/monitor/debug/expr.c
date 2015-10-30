@@ -190,6 +190,7 @@ static bool make_token(char *e) {
 						for(i=0;i<nr_symtab_entry;i++) {
 							if (symtab[i].st_info == 17 && strcmp((char *)&strtab[symtab[i].st_name], tokens[nr_token].str) == 0)
 							{
+								printf("%d\n", symtab[i].st_value);
 								sprintf(tokens[nr_token].str, "%d", symtab[i].st_value);
 								tokens[nr_token].type = NUM;
 								break;
