@@ -114,10 +114,7 @@ static int cmd_info(char *args){
 		else if ('f' == args[0])
 		{
 			for (i=0; i < nr_symtab_entry; ++i)
-			{
-				printf("%s, %x, %u\n", (char *)&strtab[symtab[i].st_name], symtab[i].st_value, symtab[i].st_info);
-			}
-			
+				printf("%10s, 0x%8x, %u\n", (char *)&strtab[symtab[i].st_name], symtab[i].st_value, symtab[i].st_info);
 		}
 		else
 			printf("info r 打印寄存器状态, info w 打印监视点信息, info e 打印标志寄存器信息\ninfo f 打印符号表\n");
