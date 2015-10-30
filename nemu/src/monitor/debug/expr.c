@@ -187,6 +187,8 @@ static bool make_token(char *e) {
 						nr_token++;
 						break;
 					case SYMBOL:
+						strncpy(tokens[nr_token].str, substr_start, substr_len);
+						tokens[nr_token].str[substr_len]='\0';
 						for(i=0;i<nr_symtab_entry;i++) {
 							printf("%15s, 0x%08x, %u\n", (char *)&strtab[symtab[i].st_name], symtab[i].st_value, symtab[i].st_info);
 							printf("%s,%s\n", &strtab[symtab[i].st_name], tokens[nr_token].str);
