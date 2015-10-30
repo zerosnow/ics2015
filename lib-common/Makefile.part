@@ -3,9 +3,9 @@
 FLOAT_OBJ := $(FLOAT:.a=.o)
 
 $(FLOAT): $(FLOAT_OBJ)
-	ar rs $(FLOAT) $(FLOAT_OBJ)
+	ar r $(FLOAT) $(FLOAT_OBJ)
 
 # TODO: write a rule for generating $(FLOAT_OBJ)
 
 $(FLOAT_OBJ):
-	gcc -c -m32 -fno-builtin lib-common/FLOAT.c -I lib-common -o lib-common/FLOAT
+	gcc -c -m32 -fno-builtin $(LIB_COMMON_DIR)/FLOAT.c -I $(LIB_COMMON_DIR) -o obj/$(LIB_COMMON_DIR)/FLOAT.o
