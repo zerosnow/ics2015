@@ -37,7 +37,7 @@ static struct rule {
 	{"^\\$[a-z]+",REG, 0},					//register
 	{"\\(", '(', 15},	
 	{"\\)", ')', 15},
-	{"^[A-Za-z_][A-Za-z0-9_]*$", SYMBOL, 0}
+	{"^[A-Za-z_][A-Za-z0-9_]*", SYMBOL, 0}
 	
 };
 
