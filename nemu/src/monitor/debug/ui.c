@@ -6,8 +6,12 @@
 #include <stdlib.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+#include <elf.h>
 
 void cpu_exec(uint32_t);
+extern int nr_symtab_entry;
+extern Elf32_Sym *symtab;
+extern char *strtab;
 
 /* We use the ``readline'' library to provide more flexibility to read from stdin. */
 char* rl_gets() {
@@ -77,8 +81,10 @@ static int cmd_si(char *args){
 }
 
 static int cmd_info(char *args){
+	int i;
 	if(NULL == args)
-		printf("info r 打印寄存器状态, info w 打印监视点信息\n");
+		printf("info r 打印寄存器状态, info w 打印监视点信息, info e 打印标志寄存器信息\ninfo f 打印符号表\n");
+
 	else{
 		if('r' == args[0]){
 			printf("cpu.eax = %x\n", cpu.eax);
@@ -105,8 +111,16 @@ static int cmd_info(char *args){
 			printf("DF           = %d\n", (cpu.eflags>>10) & 0x1);
 			printf("OF           = %d\n", (cpu.eflags>>11) & 0x1);
 		}
+		else if ('f' == args[0])
+		{
+			for (i=0; i < nr_symtab_entry; ++i)
+			{
+				printf("%c, %x, %u\n", strtab[symtab[i].st_name], symtab[i].st_value, symtab[i].st_info);
+			}
+			
+		}
 		else
-			printf("info r 打印寄存器状态, info w 打印监视点信息\n");
+			printf("info r 打印寄存器状态, info w 打印监视点信息, info e 打印标志寄存器信息\ninfo f 打印符号表\n");
 	}
 	return 0;
 }

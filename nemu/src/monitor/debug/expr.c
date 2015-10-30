@@ -32,7 +32,8 @@ static struct rule {
 	{"^[0-9]+",NUM, 0},					//number
 	{"^\\$[a-z]+",REG, 0},					//register
 	{"\\(", '(', 15},	
-	{"\\)", ')', 15}
+	{"\\)", ')', 15},
+	{"^[A-Za-z_][A-Za-z0-9_]*$", SYMBOL, 0}
 	
 };
 
@@ -181,6 +182,8 @@ static bool make_token(char *e) {
 						tokens[nr_token].type=NUM;
 						nr_token++;
 						break;
+					case SYMBOL:
+						
 					default: 
 						tokens[nr_token].priority=rules[i].priority;
 						tokens[nr_token].type=rules[i].token_type;
