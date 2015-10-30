@@ -115,7 +115,7 @@ static int cmd_info(char *args){
 		{
 			for (i=0; i < nr_symtab_entry; ++i)
 			{
-				printf("%c, %x, %u\n", strtab[symtab[i].st_name], symtab[i].st_value, symtab[i].st_info);
+				printf("%s, %x, %u\n", (char *)&strtab[symtab[i].st_name], symtab[i].st_value, symtab[i].st_info);
 			}
 			
 		}
