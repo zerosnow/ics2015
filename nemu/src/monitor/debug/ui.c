@@ -220,7 +220,7 @@ static int cmd_bt(char *args) {
 			tempStactFrame.args[i] = swaddr_read(temp_ebp+8+4*i, 4);
 		}
 		temp_ebp = tempStactFrame.prev_ebp;
-		printf("0x%08x, %15s(%4d,%4d,%4d,%4d)\n", tempStactFrame.begin_addr, tempStactFrame.cur_funcName,
+		printf("0x%08x, %15s(%8d,%8d,%8d,%8d)\n", tempStactFrame.begin_addr, tempStactFrame.cur_funcName,
 			tempStactFrame.args[0], tempStactFrame.args[1], tempStactFrame.args[2], tempStactFrame.args[3]);
 	}
 	return 0;
