@@ -11,7 +11,7 @@ FLOAT F_div_F(FLOAT a, FLOAT b) {
 }
 
 FLOAT f2F(float a) {
-	FLOAT result = (FLOAT)(a*2^16);
+	FLOAT result = (FLOAT)((2^16) * a);
 	return result;
 }
 
