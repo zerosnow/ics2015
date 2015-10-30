@@ -194,6 +194,7 @@ static bool make_token(char *e) {
 							{
 								sprintf(tokens[nr_token].str, "%u", symtab[i].st_value);
 								tokens[nr_token].type = NUM;
+								nr_token++;
 								break;
 							}
 						}
