@@ -192,7 +192,7 @@ static bool make_token(char *e) {
 						for(i=0;i<nr_symtab_entry;i++) {
 							printf("%15s, 0x%08x, %u\n", (char *)&strtab[symtab[i].st_name], symtab[i].st_value, symtab[i].st_info);
 							printf("%s,%s\n", &strtab[symtab[i].st_name], tokens[nr_token].str);
-							if (symtab[i].st_info == STT_OBJECT && strcmp((char *)&strtab[symtab[i].st_name], tokens[nr_token].str) == 0)
+							if (symtab[i].st_info == 17 && strcmp((char *)&strtab[symtab[i].st_name], tokens[nr_token].str) == 0)
 							{
 								printf("%u\n", symtab[i].st_value);
 								sprintf(tokens[nr_token].str, "%u", symtab[i].st_value);
