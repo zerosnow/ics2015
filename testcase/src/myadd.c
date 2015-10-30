@@ -9,7 +9,7 @@ int caller() {
 	int temp2 = 80;
 	int temp3 = 40;
 	int sum;
-	set_bp();s
+	set_bp();
 	sum = add(temp1, temp2, temp3);
 	return sum;
 }
