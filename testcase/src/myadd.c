@@ -1,3 +1,5 @@
+#include "trap.h"
+
 int add(int x, int y) {
 	return x+y;
 }
@@ -10,7 +12,7 @@ int caller() {
 }
 
 int main() {
-	caller()
+	caller();
 	HIT_GOOD_TRAP;
 	return 0;
 }
