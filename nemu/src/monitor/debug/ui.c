@@ -67,6 +67,15 @@ static struct {
 
 };
 
+typedef struct {
+	swaddr_t prev_ebp;
+	swaddr_t cur_addr;	//当前函数中的地址
+	char *cur_funcName;	//当前函数名称
+	swaddr_t begin_addr;	//当前函数起始地址
+	swaddr_t ret_addr;
+	uint32_t args[4];
+}PartOfStackFrame;
+
 #define NR_CMD (sizeof(cmd_table) / sizeof(cmd_table[0]))
 
 static int cmd_si(char *args) {
@@ -186,22 +195,33 @@ static int cmd_d(char *args) {
 }
 
 static int cmd_bt(char *args) {
+	int i;
 	uint32_t temp_ebp = cpu.ebp;
-	uint32_t temp_esp = cpu.esp;
+	PartOfStackFrame tempStactFrame;
+	tempStactFrame.ret_addr = 0;
 	if (args != NULL) {
 		printf("bt, 打印栈帧链");
 		return 0;
 	}
 	while(temp_ebp != 0) {
-		if (temp_esp != temp_ebp) {
-			printf("%x\n", swaddr_read(temp_esp, 4));
-			temp_esp +=4;
+		//初始化一些值
+		tempStactFrame.cur_funcName = NULL;
+		tempStactFrame.begin_addr = 0;
+		tempStactFrame.prev_ebp = swaddr_read(temp_ebp, 4);
+		tempStactFrame.cur_addr = tempStactFrame.ret_addr?tempStactFrame.ret_addr:cpu.eip;
+		for(i=0;i<nr_symtab_entry;i++) {
+			if (symtab[i].st_info == 18 && tempStactFrame.cur_addr >= symtab[i].st_value && tempStactFrame.cur_addr <=symtab[i].st_value + symtab[i].st_size) {
+				strcpy(tempStactFrame.cur_funcName ,(char *)&strtab[symtab[i].st_name]);
+				tempStactFrame.begin_addr = symtab[i].st_value;
+			}
 		}
-		else {
-			temp_ebp = swaddr_read(temp_esp, 4);
-			printf("%x\n", temp_ebp);
-			temp_esp +=4;
-		}	
+		tempStactFrame.ret_addr = swaddr_read(temp_ebp+4, 4);
+		for (i=0; i<4; ++i) {
+			tempStactFrame.args[i] = swaddr_read(temp_ebp+8+4*i, 4);
+		}
+		temp_ebp = tempStactFrame.prev_ebp;
+		printf("0x%08x, %15s(%4d,%4d,%4d,%4d)\n", tempStactFrame.begin_addr, tempStactFrame.cur_funcName,
+			tempStactFrame.args[0], tempStactFrame.args[1], tempStactFrame.args[2], tempStactFrame.args[3]);
 	}
 	return 0;
 }
