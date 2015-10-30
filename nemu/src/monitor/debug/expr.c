@@ -194,8 +194,8 @@ static bool make_token(char *e) {
 							printf("%s,%s\n", &strtab[symtab[i].st_name], tokens[nr_token].str);
 							if (symtab[i].st_info == STT_OBJECT && strcmp((char *)&strtab[symtab[i].st_name], tokens[nr_token].str) == 0)
 							{
-								printf("%d\n", symtab[i].st_value);
-								sprintf(tokens[nr_token].str, "%d", symtab[i].st_value);
+								printf("%u\n", symtab[i].st_value);
+								sprintf(tokens[nr_token].str, "%u", symtab[i].st_value);
 								tokens[nr_token].type = NUM;
 								break;
 							}
