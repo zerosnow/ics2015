@@ -70,7 +70,7 @@ static struct {
 typedef struct {
 	swaddr_t prev_ebp;
 	swaddr_t cur_addr;	//当前函数中的地址
-	char *cur_funcName;	//当前函数名称
+	char cur_funcName[15];	//当前函数名称
 	swaddr_t begin_addr;	//当前函数起始地址
 	swaddr_t ret_addr;
 	uint32_t args[4];
@@ -205,7 +205,7 @@ static int cmd_bt(char *args) {
 	}
 	while(temp_ebp != 0) {
 		//初始化一些值
-		tempStactFrame.cur_funcName = NULL;
+		tempStactFrame.cur_funcName[0] = '\0';
 		tempStactFrame.begin_addr = 0;
 		tempStactFrame.prev_ebp = swaddr_read(temp_ebp, 4);
 		tempStactFrame.cur_addr = tempStactFrame.ret_addr?tempStactFrame.ret_addr:cpu.eip;
