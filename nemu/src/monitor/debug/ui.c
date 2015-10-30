@@ -199,6 +199,7 @@ static int cmd_bt(char *args) {
 		}
 		else {
 			temp_ebp = swaddr_read(temp_esp, 4);
+			printf("%x\n", temp_ebp);
 			temp_esp +=4;
 		}	
 	}
