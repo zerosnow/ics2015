@@ -7,7 +7,9 @@ int add(int x, int y) {
 int caller() {
 	int temp1 = 125;
 	int temp2 = 80;
-	int sum = add(temp1, temp2);
+	int sum;
+	set_bp();
+	sum = add(temp1, temp2);
 	return sum;
 }
 
