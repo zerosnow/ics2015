@@ -6,7 +6,11 @@
 #include <sys/types.h>
 #include <regex.h>
 #include <stdlib.h>
+ #include <elf.h>
 
+extern int nr_symtab_entry;
+extern Elf32_Sym *symtab;
+extern char *strtab;
 
 static struct rule {
 	char *regex;
@@ -183,6 +187,15 @@ static bool make_token(char *e) {
 						nr_token++;
 						break;
 					case SYMBOL:
+						for(i=0;i<nr_symtab_entry;i++) {
+							if (symtab[i].st_info == 17 && strcmp((char *)&strtab[symtab[i].st_name], tokens[nr_token].str) == 0)
+							{
+								sprintf(tokens[nr_token].str, "%d", symtab[i].st_value);
+								tokens[nr_token].type = NUM;
+								break;
+							}
+						}
+						break;
 						
 					default: 
 						tokens[nr_token].priority=rules[i].priority;
