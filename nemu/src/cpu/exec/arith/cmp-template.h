@@ -3,7 +3,7 @@
 #define instr cmp
 
 static void do_execute() {
-	printf("%d, %d\n", OP_TYPE_SIMM, op_src->type);
+	printf("%d, %d\n", OP_TYPE_SIMM, op_src->simm);
 	if (op_src->type == OP_TYPE_IMM)
 		op_src->simm = 0xffffff00 | op_src->simm;
 	DATA_TYPE result = op_dest->val - op_src->val;
