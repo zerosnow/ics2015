@@ -3,10 +3,9 @@
 #define instr cmp
 
 static void do_execute() {
-	printf("%x, %x\n", OP_TYPE_SIMM, op_src->simm);
 	if (op_src->type == OP_TYPE_IMM)
 		op_src->simm = 0xffffff00 | op_src->simm;
-	printf("%x, %x, %x\n", OP_TYPE_SIMM, op_src->simm, op_dest->val);
+	printf("%x, %x, %x\n",op_src->type,  op_src->simm, op_dest->val);
 	DATA_TYPE result = op_dest->val - op_src->val;
 	cpu.OF = ((~(MSB(op_dest->val)))&(MSB(op_src->val))&(MSB(result))) || 
 		((MSB(op_dest->val))&(~(MSB(op_src->val)))&(~(MSB(result))));
