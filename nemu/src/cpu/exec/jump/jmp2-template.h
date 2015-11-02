@@ -5,7 +5,7 @@
 static void do_execute() {
 	#if DATABYTE == 2 
 		cpu.eip = op_src->val & 0x0000ffff;
-	#elif DATABYTE == 4
+	#else
 		cpu.eip = op_src->val;
 	#endif
 	print_asm_template1();
