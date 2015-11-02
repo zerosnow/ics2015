@@ -99,7 +99,7 @@ helper_fun opcode_table [256] = {
 /* 0x08 */	or_r2rm_b, or_r2rm_v, or_rm2r_b, or_rm2r_v,
 /* 0x0c */	or_i2a_b, or_i2a_v,inv, _2byte_esc,
 /* 0x10 */	inv, inv, inv, inv,
-/* 0x14 */	inv, inv, pop_r_v, inv,
+/* 0x14 */	inv, inv, inv, pop_r_v,
 /* 0x18 */	inv, inv, inv, inv,
 /* 0x1c */	inv, inv, inv, inv,
 /* 0x20 */	and_r2rm_b, and_r2rm_v, and_rm2r_b, and_rm2r_v,
