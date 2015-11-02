@@ -6,6 +6,7 @@
 #include "data-mov/pop.h"
 
 #include "jump/call.h"
+#include "jump/call2.h"
 #include "jump/je.h"
 #include "jump/jne.h"
 #include "jump/jbe.h"
