@@ -3,7 +3,11 @@
 #define instr jmp2
 
 static void do_execute() {
-	cpu.eip = op_src->val;
+	#if DATABYTE == 2 
+		cpu.eip = op_src->val & 0x0000ffff;
+	#elif DATABYTE == 4
+		cpu.eip = op_src->val;
+	#endif
 	print_asm_template1();
 }
 
