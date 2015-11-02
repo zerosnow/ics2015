@@ -220,7 +220,8 @@ static int cmd_bt(char *args) {
 			if (temp_ebp+8+4*i == 0x8000000)
 				while(i<4)
 					tempStactFrame.args[i++] = 0;
-			tempStactFrame.args[i] = swaddr_read(temp_ebp+8+4*i, 4);
+			else
+				tempStactFrame.args[i] = swaddr_read(temp_ebp+8+4*i, 4);
 		}
 		temp_ebp = tempStactFrame.prev_ebp;
 		printf("0x%08x, %15s(%8d,%8d,%8d,%8d)\n", tempStactFrame.begin_addr, tempStactFrame.cur_funcName,
