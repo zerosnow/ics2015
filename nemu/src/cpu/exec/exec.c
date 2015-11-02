@@ -203,7 +203,7 @@ helper_fun _rep_table[256] = {
 /* 0x98 */	inv, inv, inv, inv, 
 /* 0x9c */	inv, inv, inv, inv, 
 /* 0xa0 */	inv, inv, inv, inv, 
-/* 0xa4 */	inv, movs, inv, inv,
+/* 0xa4 */	movs, movs, inv, inv,
 /* 0xa8 */	inv, inv, inv, inv,
 /* 0xac */	inv, inv, inv, inv,
 /* 0xb0 */	inv, inv, inv, inv, 
