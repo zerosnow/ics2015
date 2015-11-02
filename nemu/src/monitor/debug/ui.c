@@ -204,7 +204,6 @@ static int cmd_bt(char *args) {
 		return 0;
 	}
 	while(temp_ebp != 0) {
-		printf("%x\n", temp_ebp);
 		//初始化一些值
 		tempStactFrame.cur_funcName[0] = '\0';
 		tempStactFrame.begin_addr = 0;
@@ -216,11 +215,10 @@ static int cmd_bt(char *args) {
 				tempStactFrame.begin_addr = symtab[i].st_value;
 			}
 		}
-		printf("%x\n", temp_ebp);
 		if (temp_ebp+4 != 0x8000000)
 			tempStactFrame.ret_addr = swaddr_read(temp_ebp+4, 4);
 		for (i=0; i<4; ++i) {
-			if (temp_ebp+8+4*i == 0x8000000)
+			if (temp_ebp+8+4*i >= 0x8000000)
 				while(i<4)
 					tempStactFrame.args[i++] = 0;
 			else
