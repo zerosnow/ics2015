@@ -14,5 +14,5 @@
 
 /* for instruction encoding overloading */
 
-make_helper_v(jmp2_i)
+make_helper_v(jmp2_rm)
 
