@@ -16,6 +16,7 @@
 #include "jump/jg.h"
 #include "jump/jge.h"
 #include "jump/jmp.h"
+#include "jump/jmp2.h"
 #include "jump/leave.h"
 #include "jump/ret.h"
 

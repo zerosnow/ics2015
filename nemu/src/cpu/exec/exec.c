@@ -80,7 +80,7 @@ make_group(group4,
 /* 0xff */
 make_group(group5,
 	inv, inv, inv, inv, 
-	inv, inv, inv, inv)
+	jmp2_i_v, inv, inv, inv)
 
 make_group(group6,
 	inv, inv, inv, inv, 
