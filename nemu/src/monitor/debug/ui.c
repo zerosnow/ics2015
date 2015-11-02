@@ -217,7 +217,7 @@ static int cmd_bt(char *args) {
 		}
 		tempStactFrame.ret_addr = swaddr_read(temp_ebp+4, 4);
 		for (i=0; i<4; ++i) {
-			if (temp_ebp+8+4*i == 0x80000000)
+			if (temp_ebp+8+4*i == 0x8000000)
 				while(i<4)
 					tempStactFrame.args[i++] = 0;
 			tempStactFrame.args[i] = swaddr_read(temp_ebp+8+4*i, 4);
