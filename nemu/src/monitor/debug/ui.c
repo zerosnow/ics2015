@@ -203,7 +203,8 @@ static int cmd_bt(char *args) {
 		printf("bt, 打印栈帧链");
 		return 0;
 	}
-	while(temp_ebp != 0x8000000) {
+	while(temp_ebp != 0) {
+		printf("%x\n", temp_ebp);
 		//初始化一些值
 		tempStactFrame.cur_funcName[0] = '\0';
 		tempStactFrame.begin_addr = 0;
