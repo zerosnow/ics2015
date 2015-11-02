@@ -3,7 +3,7 @@
 #define instr movsx
 
 static void do_execute () {
-	printf("%d\n", DATA_BYTE);
+	printf("%d, %d\n", DATA_BYTE, op_src->val);
 	#if DATA_BYTE == 1
 		op_src->val = 0xffffff00 | op_src->val;
 	#elif DATA_BYTE == 2
