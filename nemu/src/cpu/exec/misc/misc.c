@@ -1,5 +1,6 @@
 #include "cpu/exec/helper.h"
 #include "cpu/decode/modrm.h"
+#include "nemu.h"
 
 make_helper(nop) {
 	print_asm("nop");
@@ -26,5 +27,12 @@ make_helper(lea) {
 
 make_helper(cld) {
 	cpu.DF = 0;
+	return 1;
+}
+
+make_helper(movs) {
+	int i = cpu.ecx;
+	while(i-->0) 
+		swaddr_write(cpu.edi,  4, swaddr_read(cpu.esi, 4));
 	return 1;
 }
