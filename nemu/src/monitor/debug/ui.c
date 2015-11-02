@@ -215,10 +215,8 @@ static int cmd_bt(char *args) {
 				tempStactFrame.begin_addr = symtab[i].st_value;
 			}
 		}
-		if (temp_ebp+4 != 0x8000000) {
-			tempStactFrame.ret_addr = swaddr_read(temp_ebp+4, 4);
-			break;
-		}
+		if (temp_ebp+4 == 0x8000000)break;
+		tempStactFrame.ret_addr = swaddr_read(temp_ebp+4, 4);
 		for (i=0; i<4; ++i) {
 			if (temp_ebp+8+4*i == 0x8000000)
 				while(i<4)
