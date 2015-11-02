@@ -216,6 +216,7 @@ static int cmd_bt(char *args) {
 				tempStactFrame.begin_addr = symtab[i].st_value;
 			}
 		}
+		printf("%x\n", temp_ebp);
 		if (temp_ebp != 0x8000000)
 			tempStactFrame.ret_addr = swaddr_read(temp_ebp+4, 4);
 		for (i=0; i<4; ++i) {
