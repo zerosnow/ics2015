@@ -9,6 +9,7 @@ static void do_execute () {
 	#elif DATA_BYTE == 2
 		op_src->val = 0xffff0000 | op_src->val;
 	#endif
+	printf("%d\n", op_src->val);
 	OPERAND_W(op_dest, op_src->val);
 	print_asm_template2();
 }
