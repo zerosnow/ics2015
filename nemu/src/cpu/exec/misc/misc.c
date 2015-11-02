@@ -34,5 +34,6 @@ make_helper(movs) {
 	int i = cpu.ecx;
 	while(i-->0) 
 		swaddr_write(cpu.edi,  4, swaddr_read(cpu.esi, 4));
+	print_asm("rep movs SS:esi > edi");
 	return 1;
 }

@@ -3,6 +3,8 @@
 #define instr call2
 
 static void do_execute() {
+	cpu.esp -=4;
+	MEM_W(cpu.esp, cpu.eip);
 	#if DATABYTE == 2 
 		cpu.eip = op_src->val & 0x0000ffff - 2;
 	#else
