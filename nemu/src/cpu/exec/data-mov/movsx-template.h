@@ -3,7 +3,6 @@
 #define instr movsx
 
 static void do_execute () {
-	printf("%d, %d\n", DATA_BYTE, op_src->val);
 	if (MSB(op_src->val))
 	{
 		#if DATA_BYTE == 1
@@ -12,7 +11,6 @@ static void do_execute () {
 			op_src->val = 0xffff0000 | op_src->val;
 		#endif
 	}
-	printf("%x\n", op_src->val);
 	write_operand_l(op_dest, op_src->val);
 	print_asm_template2();
 }

@@ -3,6 +3,7 @@
 #define instr cmp
 
 static void do_execute() {
+	printf("%d\n", DATA_BYTE);
 	DATA_TYPE result = op_dest->val - op_src->val;
 	cpu.OF = ((~(MSB(op_dest->val)))&(MSB(op_src->val))&(MSB(result))) || 
 		((MSB(op_dest->val))&(~(MSB(op_src->val)))&(~(MSB(result))));
