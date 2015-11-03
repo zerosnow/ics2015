@@ -6,7 +6,7 @@ FLOAT F_mul_F(FLOAT a, FLOAT b) {
 }
 
 FLOAT F_div_F(FLOAT a, FLOAT b) {
-	FLOAT result = a/b * 2^16;
+	FLOAT result = a * 2^16 / b;
 	return result;
 }
 
