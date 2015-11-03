@@ -1,4 +1,5 @@
 #include "FLOAT.h"
+#include <stdio.h>
 
 FLOAT F_mul_F(FLOAT a, FLOAT b) {
 	long long A = a;
