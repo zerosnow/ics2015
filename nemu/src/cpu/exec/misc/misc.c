@@ -37,3 +37,11 @@ make_helper(movs) {
 	print_asm("rep movs SS:esi > edi");
 	return 1;
 }
+
+make_helper(cwd_cdq) {
+	if (cpu.eax >> 31 == 1) 
+		cpu.edx = 0xffffffff;
+	else
+		cpu.edx = 0;
+	return 1;
+}
