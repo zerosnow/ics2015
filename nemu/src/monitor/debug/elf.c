@@ -19,7 +19,9 @@ void load_elf_tables(int argc, char *argv[]) {
 	/* Read the first 4096 bytes from the exec_file.
 	 * They should contain the ELF header and program headers. */
 	ret = fread(buf, 4096, 1, fp);
-	assert(ret == 1);
+	if (!feof(fp)) {
+		assert(ret == 1);
+	}
 
 	/* The first several bytes contain the ELF header. */
 	Elf32_Ehdr *elf = (void *)buf;
