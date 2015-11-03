@@ -1,7 +1,6 @@
 #include "cpu/exec/template-start.h"
 
 #define instr call
-
 static void do_execute() {
 	cpu.esp -=4;
 	MEM_W(cpu.esp, cpu.eip);
@@ -16,6 +15,7 @@ static void do_execute() {
 	}
 	else 
 		cpu.eip +=op_src->val;
+	call_stack[ptr_call_stack++] = 5;
 	print_asm_template1();
 }
 

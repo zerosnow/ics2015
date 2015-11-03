@@ -2,6 +2,7 @@
 
 #define instr call2
 
+
 static void do_execute() {
 	cpu.esp -=4;
 	MEM_W(cpu.esp, cpu.eip);
@@ -10,6 +11,7 @@ static void do_execute() {
 	#else
 		cpu.eip = op_src->val - 2 ;
 	#endif
+	call_stack[ptr_call_stack++] = 2;
 	print_asm_template1();
 }
 
