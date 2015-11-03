@@ -4,6 +4,12 @@
 #include "trap.h"
 
 typedef int FLOAT;
+typedef struct floatStruct
+{
+	unsigned int tailCode	:23;
+	unsigned int orderCode	:8;
+	unsigned int sign		:1;
+}FloatStruct;
 
 static inline int F2int(FLOAT a) {
 	int result = a / 2^16;
