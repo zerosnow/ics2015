@@ -90,16 +90,12 @@ FLOAT f(FLOAT x) {
 FLOAT computeT(int n, FLOAT a, FLOAT b, FLOAT (*fun)(FLOAT)) {
 	int k;
 	FLOAT s,h;
-	printf("%d,%d\n", b, a);
 	h = F_div_int((b - a), n);
-	printf("%d\n", h);
 	s = F_div_int(fun(a) + fun(b), 2 );
 	for(k = 1; k < n; k ++) {
 		s += fun(a + F_mul_int(h, k));
-		printf("%d\n", s);
 	}
 	s = F_mul_F(s, h);
-	printf("%d, %d\n", s ,h);
 	return s;
 }
 
