@@ -12,12 +12,12 @@ typedef struct floatStruct
 }FloatStruct;
 
 static inline int F2int(FLOAT a) {
-	int result = a / 2^16;
+	int result = a>>16;
 	return result;
 }
 
 static inline FLOAT int2F(int a) {
-	FLOAT result = a * 2^16;
+	FLOAT result = a<<16;
 	return result;
 }
 
