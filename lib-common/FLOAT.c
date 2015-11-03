@@ -12,10 +12,8 @@ FLOAT F_div_F(FLOAT a, FLOAT b) {
 	long long A = a;
 	long long B = b;
 	FLOAT result;
-	long long temp;
 	A = A<<16;
-	//temp = A/B;
-	result = (FLOAT)(temp);
+	result = (FLOAT)(A/B);
 	return result;
 }
 
