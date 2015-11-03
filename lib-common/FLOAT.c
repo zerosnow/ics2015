@@ -9,14 +9,14 @@ FLOAT F_mul_F(FLOAT a, FLOAT b) {
 }
 
 FLOAT F_div_F(FLOAT a, FLOAT b) {
-	// long long A = a;
-	// long long B = b;
-	// FLOAT result;
-	// long long temp;
-	// A = A<<16;
-	// temp = A/B;
-	// result = (FLOAT)(temp);
-	// return result;
+	long long A = a;
+	long long B = b;
+	FLOAT result;
+	long long temp;
+	A = A<<16;
+	temp = A/B;
+	result = (FLOAT)(temp);
+	return result;
 }
 
 FLOAT f2F(float a) {
