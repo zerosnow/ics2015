@@ -14,8 +14,9 @@ FLOAT F_mul_F(FLOAT a, FLOAT b) {
 FLOAT F_div_F(FLOAT a, FLOAT b) {
 	long long A = a;
 	long long B = b;
+	FLOAT result;
 	A = A<<16;
-	FLOAT result = (FLOAT)(A/B);
+	result = (FLOAT)(A/B);
 	return result;
 }
 
