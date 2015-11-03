@@ -11,9 +11,30 @@ FLOAT F_div_F(FLOAT a, FLOAT b) {
 }
 
 FLOAT f2F(float a) {
+	FLOAT result;
+	int resultSign;
+	int resultInteger;
+	int resultFraction;
 	FloatStruct *floatStruct = &a;
-	printf("%d, %d, %d\n", floatStruct->tailCode, floatStruct->orderCode, floatStruct->sign);
-	return 1;
+	unsigned int tailCode = floatStruct->tailCode & 0x007fffff;
+	unsigned int orderCode = floatStruct->orderCode & 0x000000ff-127;
+	unsigned int sign = floatStruct->sign & 0x1;
+	if (orderCode >= -16 ||orderCode <= 14) {
+		resultSign = sign;
+		if (orderCode <= -1) {
+			resultInteger = 0;
+			resultFraction = tailCode >> (23-(16+orderCode)) | (1 << (16+orderCode));
+		}
+		else {
+			resultInteger = 1 << orderCode | tailCode >> (23-orderCode) ;
+			resultFraction = ((~(1 << 31)) >>(31-23+orderCode)) & 0xffff;
+		}
+		result = resultSign << 31 | resultInteger << 16 | resultFraction;
+	}
+	else 
+		result = 0;
+	//printf("%d, %d, %d\n", floatStruct->tailCode, floatStruct->orderCode, floatStruct->sign);
+	return result;
 }
 
 FLOAT Fabs(FLOAT a) {
