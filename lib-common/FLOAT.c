@@ -11,8 +11,8 @@ FLOAT F_div_F(FLOAT a, FLOAT b) {
 }
 
 FLOAT f2F(float a) {
-	printf("%d\n", a & 0x1);
-	//FLOAT result = (FLOAT)((2^16) * a);
+	printf("%d\n", *((int *)&a) | 0x1);
+	FLOAT result;// = (FLOAT)((2^16) * a);
 	return result;
 }
 
