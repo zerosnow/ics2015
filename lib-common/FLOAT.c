@@ -6,7 +6,7 @@ FLOAT F_mul_F(FLOAT a, FLOAT b) {
 }
 
 FLOAT F_div_F(FLOAT a, FLOAT b) {
-	FLOAT result = (a<<16) / b;
+	FLOAT result = (a<<8) / (b>>8);
 	return result;
 }
 
