@@ -210,7 +210,6 @@ static int cmd_bt(char *args) {
 		tempStactFrame.prev_ebp = swaddr_read(temp_ebp, 4);
 		tempStactFrame.cur_addr = tempStactFrame.ret_addr?tempStactFrame.ret_addr:cpu.eip;
 		for(i=0;i<nr_symtab_entry;i++) {
-			printf("%d, %s\n", symtab[i].st_info, (char *)&strtab[symtab[i].st_name]);
 			if (symtab[i].st_info == 18 && tempStactFrame.cur_addr >= symtab[i].st_value && tempStactFrame.cur_addr <=symtab[i].st_value + symtab[i].st_size) {
 				strcpy(tempStactFrame.cur_funcName ,(char *)&strtab[symtab[i].st_name]);
 				tempStactFrame.begin_addr = symtab[i].st_value;
