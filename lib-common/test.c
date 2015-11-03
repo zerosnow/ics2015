@@ -1,4 +1,7 @@
 #include "FLOAT.h"
+#include <stdio.h>
+
+#include "FLOAT.h"
 
 FLOAT F_mul_F(FLOAT a, FLOAT b) {
 	long long A = a;
@@ -77,3 +80,35 @@ FLOAT pow(FLOAT x, FLOAT y) {
 	return t;
 }
 
+
+
+FLOAT f(FLOAT x) { 
+	/* f(x) = 1/(1+25x^2) */
+	return F_div_F(int2F(1), int2F(1) + F_mul_int(F_mul_F(x, x), 25));
+}
+
+FLOAT computeT(int n, FLOAT a, FLOAT b, FLOAT (*fun)(FLOAT)) {
+	int k;
+	FLOAT s,h;
+	printf("%d,%d\n", b, a);
+	h = F_div_int((b - a), n);
+	printf("%d\n", h);
+	s = F_div_int(fun(a) + fun(b), 2 );
+	for(k = 1; k < n; k ++) {
+		s += fun(a + F_mul_int(h, k));
+		printf("%d\n", s);
+	}
+	s = F_mul_F(s, h);
+	printf("%d, %d\n", s ,h);
+	return s;
+}
+
+int main() { 
+	FLOAT a = computeT(10, f2F(-1.0), f2F(1.0), f);
+	FLOAT ans = f2F(0.551222);
+	printf("%d, %d\n", a, ans);
+
+	printf("%d, %d\n",Fabs(a - ans),  f2F(1e-4) );
+	//printf("%d, %d ,%d\n", f2F(30.0), f2F(0.3),F_div_F(f2F(30.0), f2F(0.3)));
+	return 0;
+}
