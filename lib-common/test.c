@@ -12,12 +12,22 @@ FLOAT F_mul_F(FLOAT a, FLOAT b) {
 }
 
 FLOAT F_div_F(FLOAT a, FLOAT b) {
-	long long A = a;
-	long long B = b;
-	FLOAT result;
-	A = A<<16;
-	result = (FLOAT)(A/B);
-	// FLOAT result = a<<16 / b;
+	long long remain = a;
+	long long divisor = b;
+	int count;
+	FLOAT result = 0;;
+	remain = remain << 16;
+	divisor = divisor << 16;
+	count = 16;
+	while(remain != 0) {
+		if (remain >= divisor) {
+			remain = remain - divisor;
+			result = result | (1 << count);
+		}
+		if (count == 0) break;
+		divisor = divisor >> 1;
+		count --;
+	}
 	return result;
 }
 
