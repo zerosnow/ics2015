@@ -9,7 +9,7 @@ FLOAT f(FLOAT x) {
 FLOAT computeT(int n, FLOAT a, FLOAT b, FLOAT (*fun)(FLOAT)) {
 	int k;
 	FLOAT s,h;
-	nemu_assert(a == 65536);
+	nemu_assert(b == 65536);
 	h = F_div_int((b - a), n);
 	s = F_div_int(fun(a) + fun(b), 2 );
 	for(k = 1; k < n; k ++) {
