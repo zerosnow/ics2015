@@ -11,6 +11,8 @@
 #include "jump/call2.h"
 #include "jump/je.h"
 #include "jump/jne.h"
+#include "jump/js.h"
+#include "jump/jns.h"
 #include "jump/jbe.h"
 #include "jump/ja.h"
 #include "jump/jae.h"
