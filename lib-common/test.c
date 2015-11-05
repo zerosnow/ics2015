@@ -103,7 +103,9 @@ FLOAT computeT(int n, FLOAT a, FLOAT b, FLOAT (*fun)(FLOAT)) {
 	int k;
 	FLOAT s,h;
 	h = F_div_int((b - a), n);
+	printf("%d, %d\n", fun(a), h);
 	s = F_div_int(fun(a) + fun(b), 2 );
+
 	printf("%d\n", s);
 	for(k = 1; k < n; k ++) {
 		s += fun(a + F_mul_int(h, k));
