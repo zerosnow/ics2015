@@ -32,9 +32,9 @@ FLOAT F_div_F(FLOAT a, FLOAT b) {
 
 FLOAT f2F(float a) {
 	FLOAT result;
-	int resultSign;
-	int resultInteger;
-	int resultFraction;
+	unsigned int resultSign;
+	unsigned int resultInteger;
+	unsigned int resultFraction;
 	FloatStruct *floatStruct = &a;
 	unsigned int tailCode = floatStruct->tailCode & 0x007fffff;
 	unsigned int orderCode = (floatStruct->orderCode & 0x000000ff)-127;
