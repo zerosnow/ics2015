@@ -11,7 +11,6 @@ FLOAT computeT(int n, FLOAT a, FLOAT b, FLOAT (*fun)(FLOAT)) {
 	FLOAT s,h;
 	h = F_div_int((b - a), n);
 	s = F_div_int(fun(a) + fun(b), 2 );
-	nemu_assert(a == 65536);
 	for(k = 1; k < n; k ++) {
 		s += fun(a + F_mul_int(h, k));
 	}
@@ -21,6 +20,7 @@ FLOAT computeT(int n, FLOAT a, FLOAT b, FLOAT (*fun)(FLOAT)) {
 }
 
 int main() { 
+	nemu_assert(f2F(1.0) == 65536);
 	FLOAT a = computeT(10, f2F(-1.0), f2F(1.0), f);
 	FLOAT ans = f2F(0.551222);
 
@@ -29,3 +29,4 @@ int main() {
 	HIT_GOOD_TRAP;
 	return 0;
 }
+ 
