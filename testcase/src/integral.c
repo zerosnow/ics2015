@@ -26,7 +26,7 @@ int main() {
 	FLOAT ans = f2F(0.551222);
 	Fabs(a - ans);
 	//nemu_assert(Fabs(a - ans) < f2F(1e-4));
-	// nemu_assert(f2F(0.551222));
+	nemu_assert(f2F(0.551222));
 	HIT_GOOD_TRAP;
 	return 0;
 }

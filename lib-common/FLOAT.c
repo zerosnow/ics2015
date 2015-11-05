@@ -3,16 +3,17 @@
 #include <stdlib.h>
 
 FLOAT F_mul_F(FLOAT a, FLOAT b) {
-	long long A = a;
-	long long B = b;
+	long long A = a<0?-a:a;
+	long long B = b<0?-b:b;
 	long long temp = A*B;
 	FLOAT result = (FLOAT)(temp>>16);
+	if ((a < 0 &&  b > 0) || (a > 0 && b < 0)) result = -result;
 	return result;
 }
 
 FLOAT F_div_F(FLOAT a, FLOAT b) {
-	long long remain = a;
-	long long divisor = b;
+	long long remain = a<0?-a:a;
+	long long divisor = b<0?-b:b;
 	int count;
 	FLOAT result = 0;;
 	remain = remain << 16;
@@ -27,6 +28,7 @@ FLOAT F_div_F(FLOAT a, FLOAT b) {
 		divisor = divisor >> 1;
 		count --;
 	}
+	if ((a < 0 &&  b > 0) || (a > 0 && b < 0)) result = -result;
 	return result;
 }
 
