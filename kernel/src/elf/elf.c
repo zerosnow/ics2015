@@ -41,8 +41,7 @@ uint32_t loader() {
 	//panic("please implement me");
 	ph = (Elf32_Phdr *)(buf + elf->e_phoff);
 	nemu_assert(elf->e_phnum == 3);
-	for(i=0; i<elf->e_phnum;i++,ph++) {
-		
+	for(i=0; i<elf->e_phnum;i++, ph++) {
 		nemu_assert(elf->e_phnum == 3);
 		/* Scan the program header table, load each segment into memory */
 		if(ph->p_type == PT_LOAD) {
@@ -52,7 +51,7 @@ uint32_t loader() {
 			 */
 			 set_bp();
 			 if (i ==0)
-			 	nemu_assert(ph->p_vaddr == 0x800000);
+			 	nemu_assert(ph->p_vaddr == 0x800001);
 			 else if(i==1)
 			 	nemu_assert(ph->p_vaddr == 0x8011c0);
 			 else if(i==2)
