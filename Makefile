@@ -52,7 +52,7 @@ clean: clean-cpp
 
 ##### some convinient rules #####
 
-USERPROG := obj/testcase/add-longlong
+USERPROG := obj/testcase/fact
 ENTRY := $(USERPROG)
 #ENTRY := $(kernel_BIN)
 
@@ -62,8 +62,8 @@ entry: $(ENTRY)
 run: $(nemu_BIN) $(USERPROG) entry
 	$(call git_commit, "run")
 	$(nemu_BIN) $(USERPROG)
-	objdump -d obj/kernel/kernel>obj/kernel/kernel.txt
-	
+	#objdump -d obj/kernel/kernel>obj/kernel/kernel.txt
+
 
 gdb: $(nemu_BIN) $(USERPROG) entry
 	gdb -s $(nemu_BIN) --args $(nemu_BIN) $(USERPROG)
