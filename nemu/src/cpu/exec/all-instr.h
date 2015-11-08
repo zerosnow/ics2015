@@ -13,6 +13,7 @@
 #include "jump/jne.h"
 #include "jump/js.h"
 #include "jump/jns.h"
+#include "jump/jb.h"
 #include "jump/jbe.h"
 #include "jump/ja.h"
 #include "jump/jae.h"
