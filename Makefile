@@ -52,7 +52,7 @@ clean: clean-cpp
 
 ##### some convinient rules #####
 
-USERPROG := obj/testcase/add
+USERPROG := obj/testcase/fact
 ENTRY := $(USERPROG)
 #ENTRY := $(kernel_BIN)
 
@@ -60,8 +60,8 @@ entry: $(ENTRY)
 	objcopy -S -O binary $(ENTRY) entry
 
 run: $(nemu_BIN) $(USERPROG) entry
-	objdump -d obj/kernel/kernel>obj/kernel/kernel.txt
 	$(call git_commit, "run")
+	objdump -d obj/kernel/kernel>obj/kernel/kernel.txt
 	$(nemu_BIN) $(USERPROG)
 	
 
