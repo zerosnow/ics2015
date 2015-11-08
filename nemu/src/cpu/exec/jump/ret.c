@@ -7,7 +7,7 @@ extern int ptr_call_stack;
 #include "cpu/exec/template-start.h"
 make_helper(ret_w) {
 	cpu.eip = (cpu.eip & 0xffff0000) | MEM_R(cpu.esp);
-	cpu.esp +=4;
+	cpu.esp +=2;
 	print_asm_template0();
 	if (ptr_call_stack <= 0)
 		return 5;
