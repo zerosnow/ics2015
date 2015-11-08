@@ -5,6 +5,7 @@
 static void do_execute () {
 	#if DATA_BYTE == 1
 		op_src->val = 0x000000ff & op_src->val;
+		printf("%d\n", DATA_BYTE);
 	#elif DATA_BYTE == 2
 		op_src->val = 0x0000ffff & op_src->val;
 	#endif
