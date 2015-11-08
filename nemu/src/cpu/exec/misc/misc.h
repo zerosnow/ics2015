@@ -6,6 +6,7 @@ make_helper(int3);
 make_helper(lea);
 make_helper(cld);
 make_helper(movs);
+make_helper(stos);
 make_helper(cwd_cdq);
 
 #endif

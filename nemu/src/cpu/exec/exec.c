@@ -204,7 +204,7 @@ helper_fun _rep_table[256] = {
 /* 0x9c */	inv, inv, inv, inv, 
 /* 0xa0 */	inv, inv, inv, inv, 
 /* 0xa4 */	movs, movs, inv, inv,
-/* 0xa8 */	inv, inv, inv, inv,
+/* 0xa8 */	inv, inv, stos, stos,
 /* 0xac */	inv, inv, inv, inv,
 /* 0xb0 */	inv, inv, inv, inv, 
 /* 0xb4 */	inv, inv, inv, inv, 
