@@ -145,7 +145,7 @@ static int cmd_p(char *args) {
 	if(false==success)
 		printf("Expression is wrong\n");
 	else
-		printf("%d\n",result);
+		printf("%x\n",result);
 	return 0;
 }
 
