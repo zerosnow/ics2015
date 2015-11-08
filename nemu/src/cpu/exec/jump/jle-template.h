@@ -3,7 +3,7 @@
 #define instr jle
 
 static void do_execute() {
-	if (cpu.ZF == 1 && cpu.SF != cpu.OF)
+	if (cpu.ZF == 1 || cpu.SF != cpu.OF)
 	{
 		if (MSB(op_src->val)) {
 			#if DATA_BYTE == 1
