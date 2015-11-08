@@ -51,7 +51,7 @@ uint32_t loader() {
 			 */
 			 set_bp();
 			 if (i ==0)
-			 	nemu_assert(ph->p_vaddr == 0x800001);
+			 	nemu_assert(ph->p_vaddr == 0x800000);
 			 else if(i==1)
 			 	nemu_assert(ph->p_vaddr == 0x8011c0);
 			 else if(i==2)
