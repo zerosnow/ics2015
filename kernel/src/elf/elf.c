@@ -31,7 +31,7 @@ uint32_t loader() {
 	elf = (void*)buf;
 
 	/* TODO: fix the magic number with the correct one */
-	const uint32_t elf_magic = (buf[0]<<24 & 0xff000000) | (buf[1] << 16 & 0xff0000) |(buf[2] << 8 & 0xff00) | (buf[3] & 0xff);
+	const uint32_t elf_magic = (buf[3]<<24 & 0xff000000) | (buf[2] << 16 & 0xff0000) |(buf[1] << 8 & 0xff00) | (buf[0] & 0xff);
 	uint32_t *p_magic = (void *)buf;
 	nemu_assert(*p_magic == elf_magic);
 
