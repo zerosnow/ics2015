@@ -49,6 +49,8 @@ uint32_t loader() {
 			 */
 			 if (i ==0)
 			 	nemu_assert(ph->p_vaddr == 0x800000);
+			 else if(i==1)
+			 	nemu_assert(ph->p_vaddr == 0x8011c0);
 			 ramdisk_read((uint8_t *)(ph->p_vaddr), ph->p_offset, ph->p_filesz);
 			 
 			 
