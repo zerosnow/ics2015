@@ -9,10 +9,6 @@ static void do_execute () {
 	#elif DATA_BYTE == 4
 		cpu.esp -= 4;
 		MEM_W(cpu.esp, op_src->val);
-		//string testcase
-		//printf("%x\n%x\n", op_src->val, cpu.ebp);
-		//printf("%x\n", cpu.esi);
-		//printf("%x\n", cpu.ebx);
 	#endif
 
 	print_asm_template1();
