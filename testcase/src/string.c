@@ -20,7 +20,7 @@ int main() {
 	//nemu_assert(strcmp(s[0] + 2, s[1] + 2) == -1);
 	//nemu_assert(strcmp(s[0] + 3, s[1] + 3) == -1);
 	char *ss = strcat("ab", "acb");
-	nemu_assert(strcmp(ss, "abacb") == -2);
+	nemu_assert(ss[6] > 'a');
 	//nemu_assert(strcmp( strcat(strcpy(str, str1), s[3]), s[4]) == 0);
 	//nemu_assert(strcmp(strcpy(str, str1), str1) == 0);
 	//nemu_assert(strcmp(strcat(str1, s[3]), s[4]) == 0);
