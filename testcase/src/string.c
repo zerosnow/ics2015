@@ -5,8 +5,8 @@ char *s[] = {
 	"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", 
 	"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab",
 	"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-	", World!\n",
-	"Hello, World!\n",
+	",World!\n",
+	"Hello,World!\n",
 	"#####"
 };
 
