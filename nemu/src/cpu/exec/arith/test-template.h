@@ -10,8 +10,6 @@ static void do_execute () {
 	cpu.ZF =  (result == 0);
 	cpu.SF = MSB(result);
 	cpu.OF = 0;
-	/* TODO: Update EFLAGS. */
-	//panic("please implement me");
 
 	print_asm_template2();
 }
