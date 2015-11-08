@@ -30,22 +30,6 @@ make_helper(cld) {
 	return 1;
 }
 
-make_helper(movs) {
-	int i = cpu.ecx;
-	while(i-->0) 
-		swaddr_write(cpu.edi,  1, swaddr_read(cpu.esi, 1));
-	print_asm("rep movs SS:esi > edi");
-	return 1;
-}
-
-make_helper(stos) {
-	int i = cpu.ecx;
-	while(i-->0) 
-		swaddr_write(cpu.edi,  1, reg_b(R_AL));
-	print_asm("rep movs SS:AL > edi");
-	return 1;
-}
-
 make_helper(cwd_cdq) {
 	if (cpu.eax >> 31 == 1) 
 		cpu.edx = 0xffffffff;

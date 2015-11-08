@@ -67,6 +67,11 @@
 #include "set/setp.h"
 #include "set/sets.h"
 
+#include "rep/movs.h"
+#include "rep/cmps.h"
+#include "rep/scas.h"
+#include "rep/stos.h"
+
 
 #include "string/rep.h"
 
