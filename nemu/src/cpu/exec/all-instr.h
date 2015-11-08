@@ -49,6 +49,24 @@
 #include "logic/shrd.h"
 #include "logic/shld.h"
 
+#include "set/seta.h"
+#include "set/setae.h"
+#include "set/setb.h"
+#include "set/setbe.h"
+#include "set/sete.h"
+#include "set/setg.h"
+#include "set/setge.h"
+#include "set/setl.h"
+#include "set/setle.h"
+#include "set/setne.h"
+#include "set/setno.h"
+#include "set/setnp.h"
+#include "set/setns.h"
+#include "set/seto.h"
+#include "set/setp.h"
+#include "set/sets.h"
+
+
 #include "string/rep.h"
 
 #include "misc/misc.h"
