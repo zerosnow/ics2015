@@ -3,13 +3,13 @@
 #define instr push
 
 static void do_execute () {
-	#if DATA_BYTE == 2
-		cpu.esp -=2;
-		MEM_W(cpu.esp, op_src->val);
-	#elif DATA_BYTE == 4
+	// #if DATA_BYTE == 2
+	// 	cpu.esp -=2;
+	// 	MEM_W(cpu.esp, op_src->val);
+	// #elif DATA_BYTE == 4
 		cpu.esp -= 4;
 		MEM_W(cpu.esp, op_src->val);
-	#endif
+	// #endif
 
 	print_asm_template1();
 }
