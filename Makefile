@@ -52,9 +52,9 @@ clean: clean-cpp
 
 ##### some convinient rules #####
 
-USERPROG := obj/testcase/mul-longlong
-ENTRY := $(USERPROG)
-#ENTRY := $(kernel_BIN)
+USERPROG := obj/testcase/bit
+#ENTRY := $(USERPROG)
+ENTRY := $(kernel_BIN)
 
 entry: $(ENTRY)
 	objcopy -S -O binary $(ENTRY) entry
