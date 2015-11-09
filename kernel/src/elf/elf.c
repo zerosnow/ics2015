@@ -41,27 +41,16 @@ uint32_t loader() {
 	//panic("please implement me");
 	ph = (Elf32_Phdr *)(buf + elf->e_phoff);
 	nemu_assert(elf->e_phnum == 3);
-	for(i=0; i<elf->e_phnum;i++, ph++) {
+	for(i=0; i<elf->e_phnum;i++) {
 		/* Scan the program header table, load each segment into memory */
 		if(ph->p_type == PT_LOAD) {
-
-			/* TODO: read the content of the segment from the ELF file 
-			 * to the memory region [VirtAddr, VirtAddr + FileSiz)
-			 */
 			 set_bp();
 			 if (i ==0)
 			 	nemu_assert(ph->p_vaddr == 0x800000);
 			 else if(i==1)
 			 	nemu_assert(ph->p_vaddr == 0x8011c0);
 			 ramdisk_read((uint8_t *)(ph->p_vaddr), ph->p_offset, ph->p_filesz);
-			 
-			 
-			/* TODO: zero the memory region 
-			 * [VirtAddr + FileSiz, VirtAddr + MemSiz)
-			 */
 			 memset((void *)(ph->p_vaddr+ph->p_filesz), 0, ph->p_memsz - ph->p_filesz);
-
-
 #ifdef IA32_PAGE
 			/* Record the program break for future use. */
 			extern uint32_t brk;
@@ -69,6 +58,7 @@ uint32_t loader() {
 			if(brk < new_brk) { brk = new_brk; }
 #endif
 		}
+		++ph;
 	}
 
 	volatile uint32_t entry = elf->e_entry;
