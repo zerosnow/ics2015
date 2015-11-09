@@ -6,6 +6,7 @@ extern int ptr_call_stack;
 #define DATA_BYTE 2
 #include "cpu/exec/template-start.h"
 make_helper(ret_w) {
+	printf("33333333333333\n");
 	cpu.eip = (cpu.eip & 0xffff0000) | MEM_R(cpu.esp);
 	cpu.esp +=2;
 	print_asm_template0();
@@ -19,6 +20,7 @@ make_helper(ret_w) {
 #define DATA_BYTE 4
 #include "cpu/exec/template-start.h"
 make_helper(ret_l) {
+	printf("22222222222222\n");
 	cpu.eip = MEM_R(cpu.esp);
 	cpu.esp +=4;
 	print_asm_template0();

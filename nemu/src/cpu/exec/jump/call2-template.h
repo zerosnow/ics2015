@@ -5,6 +5,7 @@
 
 static void do_execute() {
 	cpu.esp -=4;
+	printf("11111111111111111\n");
 	MEM_W(cpu.esp, cpu.eip);
 	#if DATABYTE == 2 
 		cpu.eip = op_src->val & 0x0000ffff - 2;
