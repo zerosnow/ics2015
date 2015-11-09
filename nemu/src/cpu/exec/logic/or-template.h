@@ -3,9 +3,12 @@
 #define instr or
 
 static void do_execute () {
+	if (op_src->type == OP_TYPE_SIMM && (op_src->simm >> 7) == 1) {
+		op_src->simm = 0xffffff00 | op_src->simm;
+		op_src->val = op_src->simm;
+	}
 	DATA_TYPE result = op_dest->val | op_src->val;
 	OPERAND_W(op_dest, result);
-
 	cpu.CF = 0;
 	cpu.OF = 0;
 	cpu.PF = ~( (result & 0x1) & ((result>>1) & 0x1) & ((result>>2) & 0x1) & ((result>>3) & 0x1) & 
