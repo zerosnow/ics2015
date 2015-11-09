@@ -29,18 +29,14 @@ uint32_t loader() {
 #endif
 
 	elf = (void*)buf;
-
-
-
+	
 	/* TODO: fix the magic number with the correct one */
 	const uint32_t elf_magic = 0x464c457f;
 	uint32_t *p_magic = (void *)buf;
 	nemu_assert(*p_magic == elf_magic);
 
 	/* Load each program segment */
-	//panic("please implement me");
 	ph = (Elf32_Phdr *)(buf + elf->e_phoff);
-	nemu_assert(elf->e_phnum == 3);
 	for(i=0; i<elf->e_phnum;i++) {
 		/* Scan the program header table, load each segment into memory */
 		if(ph->p_type == PT_LOAD) {
