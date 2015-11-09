@@ -5,7 +5,6 @@
 static void do_execute () {
 	cpu.esp -= DATA_BYTE;
 	MEM_W(cpu.esp, op_src->val);
-	printf("1111111111111111\n");
 	print_asm_template1();
 }
 

@@ -4,7 +4,6 @@
 #define instr leave
 
 make_helper(leave) {
-	printf("22222222222222\n");
 	cpu.esp = cpu.ebp;
 	cpu.ebp = MEM_R(cpu.esp);
 	cpu.esp +=4;
