@@ -3,7 +3,6 @@
 #define instr call
 static void do_execute() {
 	cpu.esp -=4;
-	printf("11111111111111111\n");
 	MEM_W(cpu.esp, cpu.eip);
 	if (MSB(op_src->val)) {
 		#if DATA_BYTE == 1
