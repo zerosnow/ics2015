@@ -7,7 +7,7 @@ static void do_execute() {
 		cpu.eip = op_src->val & 0x0000ffff - 2;
 	#else
 		cpu.eip = op_src->val ;
-		printf("%x\n", cpu.eip);
+		printf("%x, %d, %d\n", cpu.eip, OP_TYPE_MEM, op_src->type);
 	#endif
 	print_asm_template1();
 }
