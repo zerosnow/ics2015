@@ -62,7 +62,7 @@ entry: $(ENTRY)
 run: $(nemu_BIN) $(USERPROG) entry
 	$(call git_commit, "run")
 	$(nemu_BIN) $(USERPROG)
-	#objdump -d obj/kernel/kernel>obj/kernel/kernel.txt
+	objdump -d obj/kernel/kernel>obj/kernel/kernel.txt
 
 
 gdb: $(nemu_BIN) $(USERPROG) entry
