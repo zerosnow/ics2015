@@ -10,7 +10,9 @@ static void do_execute () {
 	cpu.ZF =  (result == 0);
 	cpu.SF = MSB(result);
 	cpu.OF = 0;
-	printf("%d, %d, %d\n", op_src->type, op_dest->type, OP_TYPE_REG);
+	//printf("%d, %d, %d\n", op_src->type, op_dest->type, OP_TYPE_REG);
+	if ((op_src->type == OP_TYPE_REG) && (op_dest->type == OP_TYPE_REG))
+		cpu.eip -= 1;
 
 	print_asm_template2();
 }
