@@ -11,7 +11,7 @@ static void do_execute () {
 	cpu.SF = MSB(result);
 	cpu.OF = 0;
 	//printf("%d, %d, %d\n", op_src->type, op_dest->type, OP_TYPE_REG);
-	if ((op_src->type == OP_TYPE_REG) && (op_dest->type == OP_TYPE_REG))
+	if ((op_src->type == OP_TYPE_REG) && (op_dest->type == OP_TYPE_REG) && op_src->reg != R_CL)
 		cpu.eip -= 1;
 
 	print_asm_template2();
