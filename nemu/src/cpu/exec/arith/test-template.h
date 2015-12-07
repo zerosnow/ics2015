@@ -10,6 +10,7 @@ static void do_execute () {
 	cpu.ZF =  (result == 0);
 	cpu.SF = MSB(result);
 	cpu.OF = 0;
+	printf("%d, %d, %d\n", op_src->type, op_dest->type, OP_TYPE_REG);
 
 	print_asm_template2();
 }
