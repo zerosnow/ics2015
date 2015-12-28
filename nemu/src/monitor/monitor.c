@@ -10,6 +10,7 @@ void load_elf_tables(int, char *[]);
 void init_regex();
 void init_wp_list();
 void init_ddr3();
+void init_cache();
 
 FILE *log_fp = NULL;
 
@@ -95,4 +96,5 @@ void restart() {
 
 	/* Initialize DRAM. */
 	init_ddr3();
+	init_cache();
 }
