@@ -80,6 +80,25 @@ uint32_t cache_read(hwaddr_t addr,  size_t len) {
 	return dram_read(addr, len);
 }
 
+void pretend_cache_read(hwaddr_t addr, size_t len) {
+	int i;
+	cache_addr caddr;
+	caddr.addr = addr;
+	uint32_t temp;
+	for (i=0;i<Q_WIDTH;i++) {
+		if (cache[caddr.r][i].q == caddr.q && cache[caddr.r][i].f == caddr.f && cache[caddr.r][i].valid == 1) {
+			if (len + caddr.w <= 64) {
+				memcpy(&temp, &cache[caddr.r][i].block[caddr.w], len);
+				printf("content = %d, f = %d, q = %d", temp, caddr.f , caddr.q);
+				return ;
+			}
+			
+		} 
+	}
+	printf("can't find in the cache");
+	return ;
+}
+
 void cache_write(hwaddr_t addr, size_t len, uint32_t data) {
 	int i;
 	cache_addr caddr;

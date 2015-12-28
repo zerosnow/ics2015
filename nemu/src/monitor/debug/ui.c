@@ -9,6 +9,7 @@
 #include <elf.h>
 
 void cpu_exec(uint32_t);
+void pretend_cache_read(hwaddr_t , size_t );
 extern int nr_symtab_entry;
 extern Elf32_Sym *symtab;
 extern char *strtab;
@@ -46,6 +47,7 @@ static int cmd_x(char *args);
 static int cmd_w(char *args);
 static int cmd_d(char *args);
 static int cmd_bt(char *args);
+static int cmd_cache(char *args);
 
 static struct {
 	char *name;
@@ -61,7 +63,8 @@ static struct {
 	{ "x", "扫描内存,x N EXPR, 以16进制输出EXPR后N个4字节单元", cmd_x },
 	{ "w", "设置监视点,示例w *0x2000,当表达式的值发生变化时停止执行", cmd_w },
 	{ "d", "删除监视点,示例d N, 删除监视点序号为N的监视点", cmd_d },
-	{ "bt", "打印栈帧链", cmd_bt}
+	{ "bt", "打印栈帧链", cmd_bt},
+	{ "cache", "cache ADDR 使用ADDR查找cache", cmd_cache}
 
 	/* TODO: Add more commands */
 
@@ -228,6 +231,21 @@ static int cmd_bt(char *args) {
 		printf("0x%08x, %15s(%8d,%8d,%8d,%8d)\n", tempStactFrame.begin_addr, tempStactFrame.cur_funcName,
 			tempStactFrame.args[0], tempStactFrame.args[1], tempStactFrame.args[2], tempStactFrame.args[3]);
 	}
+	return 0;
+}
+
+static int cmd_cache(char *args) {
+	bool success;
+	int addr;
+	if (NULL == args) {
+		printf("cache ADDR 使用ADDR查找cache\n");
+		return 0;
+	}
+	addr = expr(args,&success);
+	if(false==success)
+		printf("Expression is wrong\n");
+	else
+		pretend_cache_read(addr, 4);
 	return 0;
 }
 
