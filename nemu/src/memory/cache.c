@@ -72,7 +72,7 @@ uint32_t cache_read(hwaddr_t addr,  size_t len) {
 		} 
 	}
 	srand(time(0));
-	i = rand()%8;
+	i = rand()%BLOCK_NUM;
 	cache[caddr.r][i].q = caddr.q;
 	cache[caddr.r][i].f = caddr.f;
 	cache[caddr.r][i].valid = 1;
