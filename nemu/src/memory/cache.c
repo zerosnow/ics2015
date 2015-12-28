@@ -89,7 +89,7 @@ void pretend_cache_read(hwaddr_t addr, size_t len) {
 		if (cache[caddr.r][i].q == caddr.q && cache[caddr.r][i].f == caddr.f && cache[caddr.r][i].valid == 1) {
 			if (len + caddr.w <= 64) {
 				memcpy(&temp, &cache[caddr.r][i].block[caddr.w], len);
-				printf("content = %d, f = %d, q = %d", temp, caddr.f , caddr.q);
+				printf("content = %x, f = %d, q = %d\n", temp, caddr.f , caddr.q);
 				return ;
 			}
 			
