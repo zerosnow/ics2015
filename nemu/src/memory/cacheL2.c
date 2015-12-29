@@ -63,26 +63,26 @@ uint32_t L2cache_read(hwaddr_t addr,  size_t len) {
 			}
 		} 
 	}
-	for (i=0;i<Q_WIDTH;i++) {
-		if (L2cache[caddr.r][i].valid == 0) {
-			L2cache[caddr.r][i].q = caddr.q;
-			L2cache[caddr.r][i].f = caddr.f;
-			L2cache[caddr.r][i].valid = 1;
-			L2cache[caddr.r][i].dirty = 0;
-			update_cache(addr, L2cache[caddr.r][i].block, BLOCK_SIZE);
-			return dram_read(addr, len);
-		} 
-	}
-	srand(time(0));
-	i = rand()%BLOCK_NUM;
-	if (L2cache[caddr.r][i].dirty == 1) {
-		update_dram(addr, L2cache[caddr.r][i].block, BLOCK_SIZE);
-	}
-	L2cache[caddr.r][i].q = caddr.q;
-	L2cache[caddr.r][i].f = caddr.f;
-	L2cache[caddr.r][i].valid = 1;
-	L2cache[caddr.r][i].dirty = 0;
-	update_cache(addr, L2cache[caddr.r][i].block, BLOCK_SIZE);
+	// for (i=0;i<Q_WIDTH;i++) {
+	// 	if (L2cache[caddr.r][i].valid == 0) {
+	// 		L2cache[caddr.r][i].q = caddr.q;
+	// 		L2cache[caddr.r][i].f = caddr.f;
+	// 		L2cache[caddr.r][i].valid = 1;
+	// 		L2cache[caddr.r][i].dirty = 0;
+	// 		update_cache(addr, L2cache[caddr.r][i].block, BLOCK_SIZE);
+	// 		return dram_read(addr, len);
+	// 	} 
+	// }
+	// srand(time(0));
+	// i = rand()%BLOCK_NUM;
+	// if (L2cache[caddr.r][i].dirty == 1) {
+	// 	update_dram(addr, L2cache[caddr.r][i].block, BLOCK_SIZE);
+	// }
+	// L2cache[caddr.r][i].q = caddr.q;
+	// L2cache[caddr.r][i].f = caddr.f;
+	// L2cache[caddr.r][i].valid = 1;
+	// L2cache[caddr.r][i].dirty = 0;
+	// update_cache(addr, L2cache[caddr.r][i].block, BLOCK_SIZE);
 	return dram_read(addr, len);
 }
 
