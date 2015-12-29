@@ -3,6 +3,7 @@
 #include <time.h>
 
 CPU_state cpu;
+SELECTOR current_sreg;
 
 const char *regsl[] = {"eax", "ecx", "edx", "ebx", "esp", "ebp", "esi", "edi"};
 const char *regsw[] = {"ax", "cx", "dx", "bx", "sp", "bp", "si", "di"};

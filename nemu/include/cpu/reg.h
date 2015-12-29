@@ -62,6 +62,17 @@ typedef struct {
 	};
 } CPU_state;
 
+typedef  union {
+	struct 
+	{
+		uint16_t rpl	:2;
+		uint16_t ti	:1;
+		uint16_t index 	:13;
+	};
+	uint16_t val;
+}SELECTOR;
+
+extern SELECTOR current_sreg;
 extern CPU_state cpu;
 
 static inline int check_reg_index(int index) {
