@@ -27,5 +27,20 @@ make_helper(concat(mov_moffs2a_, SUFFIX)) {
 	print_asm("mov" str(SUFFIX) " 0x%x,%%%s", addr, REG_NAME(R_EAX));
 	return 5;
 }
+#if DATA_BYTE == 4
+make_helper(mov_cr2r) {
+	int len = decode_r_l(eip);
+	OPERAND_W(op_src, cpu.cr0.val);
+	printf("%d\n", len);
+	print_asm("mov %%%s, %%cr0", REG_NAME(R_EAX));
+	return 1+len;
+}
+make_helper(mov_r2cr) {
+	int len = decode_r_l(eip);
+	cpu.cr0.val = op_src->val;
+	print_asm("mov %%cr0, %%%s", REG_NAME(R_EAX));
+	return 1+len;
+}
+#endif
 
 #include "cpu/exec/template-end.h"
