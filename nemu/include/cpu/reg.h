@@ -52,7 +52,14 @@ typedef struct {
 		} ;
 		uint32_t eflags;
 	};
+	struct GDTR{
+		uint32_t base_addr;
+		uint16_t seg_limit;
+	}gdtr;
 	CR0 cr0;
+	struct {
+		uint16_t cs, ds, es, ss;
+	};
 } CPU_state;
 
 extern CPU_state cpu;

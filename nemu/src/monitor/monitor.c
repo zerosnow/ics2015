@@ -29,6 +29,10 @@ static void init_eflags() {
 	cpu.eflags = 0x00000002;
 }
 
+static void init_cr0() {
+	cpu.cr0.protect_enable = 0;
+}
+
 void init_monitor(int argc, char *argv[]) {
 	/* Perform some global initialization */
 
@@ -88,6 +92,9 @@ void restart() {
 #endif
 	/*initial EFLAGS*/
 	init_eflags();
+
+	/*initial cr0 register */
+	init_cr0();
 
 	/* Read the entry code into memory. */
 	load_entry();
