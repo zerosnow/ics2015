@@ -6,6 +6,7 @@ void cache_write(hwaddr_t, size_t, uint32_t);
 /* Memory accessing interfaces */
 
 uint32_t hwaddr_read(hwaddr_t addr, size_t len) {
+	printf("%x\n", addr);
 	return cache_read(addr, len) & (~0u >> ((4 - len) << 3));
 }
 

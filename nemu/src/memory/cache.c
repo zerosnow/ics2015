@@ -77,7 +77,6 @@ uint32_t cache_read(hwaddr_t addr,  size_t len) {
 	cache[caddr.r][i].q = caddr.q;
 	cache[caddr.r][i].f = caddr.f;
 	cache[caddr.r][i].valid = 1;
-	printf("%x\n", addr);
 	update_cache(addr, cache[caddr.r][i].block, BLOCK_SIZE);
 
 	return L2cache_read(addr, len);
