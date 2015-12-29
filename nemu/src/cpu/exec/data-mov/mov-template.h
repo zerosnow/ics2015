@@ -33,13 +33,13 @@ make_helper(mov_cr2r) {
 	OPERAND_W(op_src, cpu.cr0.val);
 	printf("%d\n", len);
 	print_asm("mov %%%s, %%cr0", REG_NAME(R_EAX));
-	return 1+len;
+	return 2+len;
 }
 make_helper(mov_r2cr) {
 	int len = decode_r_l(eip);
 	cpu.cr0.val = op_src->val;
 	print_asm("mov %%cr0, %%%s", REG_NAME(R_EAX));
-	return 1+len;
+	return 2+len;
 }
 #endif
 
