@@ -60,7 +60,7 @@ entry: $(ENTRY)
 	objcopy -S -O binary $(ENTRY) entry
 
 run: $(nemu_BIN) $(USERPROG) entry
-	#$(call git_commit, "run")
+	$(call git_commit, "run")
 	$(nemu_BIN) $(USERPROG)
 	objdump -d obj/kernel/kernel>obj/kernel/kernel.txt
 
