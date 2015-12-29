@@ -45,6 +45,7 @@ void init_L2cache() {
 	for(i = 0; i < GROUP_NUM; i ++) {
 		for(j = 0; j < BLOCK_NUM; j ++) {
 			L2cache[i][j].valid = 0;
+			L2cache[i][j].dirty = 0;
 		}
 	}
 }
