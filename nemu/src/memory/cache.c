@@ -12,8 +12,8 @@
 #define BLOCK_NUM (1 << Q_WIDTH) 
 #define GROUP_NUM (1 << R_WIDTH)
 
-uint32_t dram_read(hwaddr_t, size_t);
-void dram_write(hwaddr_t, size_t, uint32_t);
+uint32_t L2cache_read(hwaddr_t, size_t);
+void L2cache_write(hwaddr_t, size_t, uint32_t);
 void update_cache(hwaddr_t, void *, size_t);
 
 typedef union {
@@ -55,9 +55,8 @@ uint32_t cache_read(hwaddr_t addr,  size_t len) {
 	uint32_t temp;
 	for (i=0;i<Q_WIDTH;i++) {
 		if (cache[caddr.r][i].q == caddr.q && cache[caddr.r][i].f == caddr.f && cache[caddr.r][i].valid == 1) {
-			if (len + caddr.w <= 64) {
+			if (len + caddr.w <= BLOCK_SIZE) {
 				memcpy(&temp, &cache[caddr.r][i].block[caddr.w], len);
-				printf("hit cache");
 				return temp;
 			}
 			
@@ -69,7 +68,7 @@ uint32_t cache_read(hwaddr_t addr,  size_t len) {
 			cache[caddr.r][i].f = caddr.f;
 			cache[caddr.r][i].valid = 1;
 			update_cache(addr, cache[caddr.r][i].block, BLOCK_SIZE);
-			return dram_read(addr, len);
+			return L2cache_read(addr, len);
 		} 
 	}
 	srand(time(0));
@@ -78,7 +77,7 @@ uint32_t cache_read(hwaddr_t addr,  size_t len) {
 	cache[caddr.r][i].f = caddr.f;
 	cache[caddr.r][i].valid = 1;
 	update_cache(addr, cache[caddr.r][i].block, BLOCK_SIZE);
-	return dram_read(addr, len);
+	return L2cache_read(addr, len);
 }
 
 void pretend_cache_read(hwaddr_t addr, size_t len) {
@@ -107,7 +106,7 @@ void cache_write(hwaddr_t addr, size_t len, uint32_t data) {
 	for (i=0;i<Q_WIDTH;i++)
 		if (cache[caddr.r][i].q == caddr.q && cache[caddr.r][i].f == caddr.f && cache[caddr.r][i].valid == 1) 
 			memcpy(&cache[caddr.r][i].block[caddr.w], &data, len);
-	dram_write(addr, len, data);
+	L2cache_write(addr, len, data);
 }
 
 
