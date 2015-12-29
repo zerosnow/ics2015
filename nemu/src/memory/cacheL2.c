@@ -75,9 +75,9 @@ uint32_t L2cache_read(hwaddr_t addr,  size_t len) {
 	}
 	srand(time(0));
 	i = rand()%BLOCK_NUM;
-	if (L2cache[caddr.r][i].dirty == 1) {
-		update_dram(addr, L2cache[caddr.r][i].block, BLOCK_SIZE);
-	}
+	// if (L2cache[caddr.r][i].dirty == 1) {
+	// 	update_dram(addr, L2cache[caddr.r][i].block, BLOCK_SIZE);
+	// }
 	L2cache[caddr.r][i].q = caddr.q;
 	L2cache[caddr.r][i].f = caddr.f;
 	L2cache[caddr.r][i].valid = 1;
