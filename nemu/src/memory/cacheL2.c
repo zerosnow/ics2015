@@ -105,6 +105,7 @@ void L2cache_write(hwaddr_t addr, size_t len, uint32_t data) {
 		}
 	}
 	dram_write(addr, len, data);
+	L2cache_read(addr, len);
 	// for (i=0;i<Q_WIDTH;i++) {
 	// 	if (L2cache[caddr.r][i].valid == 0) {
 	// 		L2cache[caddr.r][i].q = caddr.q;
