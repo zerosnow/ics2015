@@ -96,6 +96,8 @@ void restart() {
 	/*initial cr0 register */
 	init_cr0();
 
+	/*initial cr0 register */
+
 	/* Read the entry code into memory. */
 	load_entry();
 

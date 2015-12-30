@@ -86,8 +86,9 @@ typedef struct {
 
 static int cmd_si(char *args) {
 	int number = 0;
-	if(NULL == args)
+	if(NULL == args) {
 		cpu_exec(1);
+	}
 	else{
 		number = strtol(args, NULL, 10);	
 		if(number > 0)
@@ -319,6 +320,7 @@ void ui_mainloop() {
 				break;
 			}
 		}
+
 
 		if(i == NR_CMD) { printf("Unknown command '%s'\n", cmd); }
 	}
