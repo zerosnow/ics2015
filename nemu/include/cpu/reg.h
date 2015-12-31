@@ -58,9 +58,39 @@ typedef struct {
 	}gdtr;
 	CR0 cr0;
 	struct {
-		uint16_t cs, ds, es, ss;
-	};
+		uint16_t selector;
+		union {
+			struct {
+				uint32_t seg_base1 	:24;
+				uint32_t seg_base2 	:8;
+			};
+			uint32_t seg_base;
+		};
+		union {
+			struct {
+				uint32_t seg_limit1 	:16;
+				uint32_t seg_limit2 	:4;
+			};
+			uint32_t seg_limit;
+		};
+	}cs, ds, es, ss;;
 } CPU_state;
+
+typedef struct {
+	uint64_t seg_limit1	:16;
+	uint64_t seg_base1	:24;
+	uint64_t A 		:1;
+	uint64_t TYPE		:3;
+	uint64_t one 		:1;
+	uint64_t DPL		:2;
+	uint64_t P		:1;
+	uint64_t seg_limit2	:4;
+	uint64_t AVL		:1;
+	uint64_t zero		:1;
+	uint64_t X		:1;
+	uint64_t G 		:1;
+	uint64_t seg_base2	:8;
+}SEG_DES;
 
 typedef  union {
 	struct 
@@ -72,6 +102,7 @@ typedef  union {
 	uint16_t val;
 }SELECTOR;
 
+extern SEG_DES *seg_des;
 extern SELECTOR current_sreg;
 extern CPU_state cpu;
 

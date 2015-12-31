@@ -40,6 +40,52 @@ make_helper(mov_r2cr) {
 	print_asm("mov %%cr0, %%%s", REG_NAME(op_src->reg));
 	return 1+len;
 }
-#endif
+
+make_helper(mov_seg) {
+	int len = decode_r_l(eip);
+	uint8_t opcode = instr_fetch(eip + 1, 1);
+	extern SEG_DES *seg_des;
+	switch(opcode) {
+		case 0xd8:
+			cpu.ds.selector = op_src->val;
+			Assert(((cpu.ds.selector>>3)<<3) <= cpu.gdtr.seg_limit, "segment out limit %d, %d", ((cpu.ds.selector>>3)<<3), cpu.gdtr.seg_limit);
+			seg_des = (SEG_DES *)(cpu.gdtr.base_addr + ((cpu.ds.selector>>3)<<3));
+			Assert(seg_des->P == 1, "segment error");
+			cpu.ds.seg_base1 = seg_des->seg_base1;
+			cpu.ds.seg_base2 = seg_des->seg_base2;
+			cpu.ds.seg_limit1 = seg_des->seg_limit1;
+			cpu.ds.seg_limit2 = seg_des->seg_limit2;
+			print_asm("mov %%%s, ds", REG_NAME(op_src->reg));
+			break;
+		case 0xc0:
+			cpu.es.selector = op_src->val;
+			Assert(((cpu.es.selector>>3)<<3) <= cpu.gdtr.seg_limit, "segment out limit %d, %d", ((cpu.es.selector>>3)<<3), cpu.gdtr.seg_limit);
+			seg_des = (SEG_DES *)(cpu.gdtr.base_addr + ((cpu.es.selector>>3)<<3));
+			Assert(seg_des->P == 1, "segment error");
+			cpu.es.seg_base1 = seg_des->seg_base1;
+			cpu.es.seg_base2 = seg_des->seg_base2;
+			cpu.es.seg_limit1 = seg_des->seg_limit1;
+			cpu.es.seg_limit2 = seg_des->seg_limit2;
+			print_asm("mov %%%s, es", REG_NAME(op_src->reg));
+			break;
+		break;
+		case 0xd0:
+			cpu.ss.selector = op_src->val;
+			Assert(((cpu.ss.selector>>3)<<3) <= cpu.gdtr.seg_limit, "segment out limit %d, %d", ((cpu.ss.selector>>3)<<3), cpu.gdtr.seg_limit);
+			seg_des = (SEG_DES *)(cpu.gdtr.base_addr + ((cpu.ss.selector>>3)<<3));
+			Assert(seg_des->P == 1, "segment error");
+			cpu.ss.seg_base1 = seg_des->seg_base1;
+			cpu.ss.seg_base2 = seg_des->seg_base2;
+			cpu.ss.seg_limit1 = seg_des->seg_limit1;
+			cpu.ss.seg_limit2 = seg_des->seg_limit2;
+			print_asm("mov %%%s, ss", REG_NAME(op_src->reg));
+			break;
+		break;
+		default:
+		break;
+	}
+	return 1+len;
+}
+#endif 
 
 #include "cpu/exec/template-end.h"

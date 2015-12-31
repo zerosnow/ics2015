@@ -33,6 +33,11 @@ static void init_cr0() {
 	cpu.cr0.protect_enable = 0;
 }
 
+static void init_seg() {
+	cpu.cs.seg_base = 0x0;
+	cpu.cs.seg_limit = 0xffffffff;
+}
+
 void init_monitor(int argc, char *argv[]) {
 	/* Perform some global initialization */
 
@@ -96,7 +101,8 @@ void restart() {
 	/*initial cr0 register */
 	init_cr0();
 
-	/*initial cr0 register */
+	/*initial seg register */
+	init_seg();
 
 	/* Read the entry code into memory. */
 	load_entry();

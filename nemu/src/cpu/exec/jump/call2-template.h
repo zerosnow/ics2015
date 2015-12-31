@@ -5,6 +5,7 @@
 
 static void do_execute() {
 	cpu.esp -=4;
+	current_sreg.val = cpu.ss.selector;
 	MEM_W(cpu.esp, cpu.eip);
 	#if DATABYTE == 2 
 		cpu.eip = op_src->val & 0x0000ffff - 2;

@@ -5,6 +5,7 @@
 
 make_helper(leave) {
 	cpu.esp = cpu.ebp;
+	current_sreg.val = cpu.ss.selector;
 	cpu.ebp = MEM_R(cpu.esp);
 	cpu.esp +=4;
 	print_asm_template0();
