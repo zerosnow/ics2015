@@ -61,8 +61,9 @@ typedef struct {
 		uint16_t selector;
 		union {
 			struct {
-				uint32_t seg_base1 	:24;
+				uint32_t seg_base1 	:16;
 				uint32_t seg_base2 	:8;
+				uint32_t seg_base3 	:8;
 			};
 			uint32_t seg_base;
 		};
@@ -70,6 +71,7 @@ typedef struct {
 			struct {
 				uint32_t seg_limit1 	:16;
 				uint32_t seg_limit2 	:4;
+				uint32_t seg_limit3 	:12;
 			};
 			uint32_t seg_limit;
 		};
@@ -77,19 +79,30 @@ typedef struct {
 } CPU_state;
 
 typedef struct {
-	uint64_t seg_limit1	:16;
-	uint64_t seg_base1	:24;
-	uint64_t A 		:1;
-	uint64_t TYPE		:3;
-	uint64_t one 		:1;
-	uint64_t DPL		:2;
-	uint64_t P		:1;
-	uint64_t seg_limit2	:4;
-	uint64_t AVL		:1;
-	uint64_t zero		:1;
-	uint64_t X		:1;
-	uint64_t G 		:1;
-	uint64_t seg_base2	:8;
+	union {
+		struct {
+			uint32_t seg_limit1	:16;
+			uint32_t seg_base1	:16;
+		};
+		uint32_t val_part1;
+	};
+	union {
+		struct {
+			uint32_t seg_base2 	:8;
+			uint32_t A 		:1;
+			uint32_t TYPE		:3;
+			uint32_t one 		:1;
+			uint32_t DPL		:2;
+			uint32_t P		:1;
+			uint32_t seg_limit2	:4;
+			uint32_t AVL		:1;
+			uint32_t zero		:1;
+			uint32_t X		:1;
+			uint32_t G 		:1;
+			uint32_t seg_base3	:8;
+		};
+		uint32_t val_part2;
+	};
 }SEG_DES;
 
 typedef  union {
