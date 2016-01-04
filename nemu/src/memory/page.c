@@ -24,7 +24,9 @@ hwaddr_t page_translate(lnaddr_t addr) {
 	PAGE_DES dir;
 	PAGE_DES page;
 	if (cpu.cr0.paging == 0)return addr;
+
 	dir.val = hwaddr_read((cpu.cr3.page_directory_base<<12)+DIR(addr), 4);
+	printf("%x, %x\n", cpu.cr3.page_directory_base, dir.val);
 	Assert(dir.P, "dir do not exist");
 	page.val = hwaddr_read((dir.page_base<<12)+PAGE(addr), 4);
 	Assert(page.P, "page do not exist");
