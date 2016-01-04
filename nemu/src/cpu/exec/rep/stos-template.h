@@ -10,8 +10,11 @@ make_helper(concat3(instr, _, SUFFIX)) {
 	#elif DATA_BYTE == 4
 		swaddr_write(cpu.edi,  DATA_BYTE, reg_l(R_EAX));
 	#endif
-	cpu.edi += DATA_BYTE;
-	cpu.esi += DATA_BYTE;
+
+	if (cpu.DF == 0) 
+		cpu.edi += DATA_BYTE;
+	else
+		cpu.edi -= DATA_BYTE;
 	return 1;
 }
 
