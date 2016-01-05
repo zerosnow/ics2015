@@ -37,13 +37,13 @@ uint32_t loader() {
 
 	/* Load each program segment */
 	ph = (Elf32_Phdr *)(buf + elf->e_phoff);
-	nemu_assert(elf->e_entry > 0x8048000);
+	nemu_assert(elf->e_entry > 0xc0000000);
 	for(i=0; i<elf->e_phnum;i++) {
 		/* Scan the program header table, load each segment into memory */
 		if(ph->p_type == PT_LOAD) {
 			mm_malloc((uint32_t)ph->p_vaddr, ph->p_memsz);
-			 ramdisk_read((uint8_t *)(ph->p_vaddr), ph->p_offset, ph->p_filesz);
-			 memset((void *)(ph->p_vaddr+ph->p_filesz), 0, ph->p_memsz - ph->p_filesz);
+			ramdisk_read((uint8_t *)(ph->p_vaddr), ph->p_offset, ph->p_filesz);
+			memset((void *)(ph->p_vaddr+ph->p_filesz), 0, ph->p_memsz - ph->p_filesz);
 #ifdef IA32_PAGE
 			/* Record the program break for future use. */
 			extern uint32_t brk;
