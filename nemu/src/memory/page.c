@@ -30,9 +30,9 @@ hwaddr_t page_translate(lnaddr_t addr) {
 
 	dir.val = hwaddr_read((cpu.cr3.page_directory_base<<12)+(DIR(addr)<<2), 4);
 	//printf("%x, %x, %x\n", cpu.cr3.page_directory_base, dir.val, DIR(addr)<<2);
-	Assert(dir.P, "dir do not exist");
+	Assert(dir.P, "dir do not exist at %x", cpu.eip);
 	page.val = hwaddr_read((dir.page_base<<12)+(PAGE(addr)<<2), 4);
-	Assert(page.P, "page do not exist");
+	Assert(page.P, "page do not exist at %x", cpu.eip);
 	//printf("%x, %x\n", (page.page_base<<12)+OFFSET(addr), (dir.page_base<<12)+PAGE(addr));
 	return (page.page_base<<12)+OFFSET(addr);
 }
