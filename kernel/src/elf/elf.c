@@ -41,6 +41,8 @@ uint32_t loader() {
 		/* Scan the program header table, load each segment into memory */
 		if(ph->p_type == PT_LOAD) {
 			mm_malloc(ph->p_vaddr, ph->p_memsz);
+			write_cr3(get_ucr3());
+
 			nemu_assert(ph->p_vaddr == 0x8048000);
 			nemu_assert(ph->p_filesz == 0x200);
 			//nemu_assert(ph->p_offset == 0x0);
