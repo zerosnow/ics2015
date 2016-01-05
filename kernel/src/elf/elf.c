@@ -37,7 +37,7 @@ uint32_t loader() {
 
 	/* Load each program segment */
 	ph = (Elf32_Phdr *)(buf + elf->e_phoff);
-	nemu_assert(elf->e_entry > 0x8080000);
+	nemu_assert(elf->e_entry > 0x8060000);
 	for(i=0; i<elf->e_phnum;i++) {
 		/* Scan the program header table, load each segment into memory */
 		if(ph->p_type == PT_LOAD) {
