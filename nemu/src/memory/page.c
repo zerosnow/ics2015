@@ -29,7 +29,7 @@ hwaddr_t page_translate(lnaddr_t addr) {
 	// if (addr >= 0x10000000)return addr;
 
 	dir.val = hwaddr_read((cpu.cr3.page_directory_base<<12)+(DIR(addr)<<2), 4);
-	printf("%x, %x, %x\n", cpu.cr3.page_directory_base, dir.val, addr);
+	printf("%x, %x, %x\n", cpu.cr3.page_directory_base, dir.val, DIR(addr)<<2);
 	Assert(dir.P, "dir do not exist");
 	page.val = hwaddr_read((dir.page_base<<12)+(PAGE(addr)<<2), 4);
 	Assert(page.P, "page do not exist");

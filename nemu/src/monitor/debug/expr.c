@@ -83,9 +83,9 @@ int hexToi(char *hex)
 		if(hex[i]>='0'&&hex[i]<='9')
 			number=number*16+hex[i]-'0';
 		else if(hex[i]>='a'&&hex[i]<='f')
-			number=number*16+hex[i]-'a';
+			number=number*16+hex[i]-'a'+10;
 		else if(hex[i]>='A'&&hex[i]<='F')
-			number=number*16+hex[i]-'A';
+			number=number*16+hex[i]-'A'+10;
 		else
 			return -1;
 		i++;

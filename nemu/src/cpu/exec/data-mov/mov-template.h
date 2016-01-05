@@ -4,6 +4,7 @@
 lnaddr_t seg_translate(swaddr_t addr, size_t len, SELECTOR current_sreg);
 
 static void do_execute() {
+	printf("%x, %x\n",  op_dest->addr, op_src->val);
 	OPERAND_W(op_dest, op_src->val);
 	print_asm_template2();
 }
