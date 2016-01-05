@@ -41,7 +41,7 @@ uint32_t loader() {
 	for(i=0; i<elf->e_phnum;i++) {
 		/* Scan the program header table, load each segment into memory */
 		if(ph->p_type == PT_LOAD) {
-			mm_malloc((uint32_t)ph->p_vaddr, ph->p_memsz);
+			//mm_malloc((uint32_t)ph->p_vaddr, ph->p_memsz);
 			ramdisk_read((uint8_t *)(ph->p_vaddr), ph->p_offset, ph->p_filesz);
 			memset((void *)(ph->p_vaddr+ph->p_filesz), 0, ph->p_memsz - ph->p_filesz);
 #ifdef IA32_PAGE
