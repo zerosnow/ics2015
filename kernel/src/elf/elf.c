@@ -40,7 +40,7 @@ uint32_t loader() {
 	for(i=0; i<elf->e_phnum;i++) {
 		/* Scan the program header table, load each segment into memory */
 		if(ph->p_type == PT_LOAD) {
-			mm_malloc((uint32_t)ph->p_vaddr, ph->p_memsz);
+			mm_malloc(ph->p_vaddr, ph->p_memsz);
 			nemu_assert(ph->p_vaddr == 0x8048000);
 			nemu_assert(ph->p_filesz == 0x200);
 			//nemu_assert(ph->p_offset == 0x0);
