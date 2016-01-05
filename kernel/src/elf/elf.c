@@ -21,7 +21,7 @@ PDE* get_kpdir();
 uint32_t loader() {
 	Elf32_Ehdr *elf;
 	Elf32_Phdr *ph = NULL;
-	PDE *kpdir, *updir;
+	//PDE *kpdir, *updir;
 	int i;
 	uint8_t buf[4096];
 
@@ -45,9 +45,9 @@ uint32_t loader() {
 		if(ph->p_type == PT_LOAD) {
 			//nemu_assert(get_ucr3()>>12 == 0x136);
 			mm_malloc(ph->p_vaddr, ph->p_memsz);
-			kpdir = get_kpdir();
-			updir = get_updir();
-			kpdir[32].val = updir[32].val;
+			//kpdir = get_kpdir();
+			//updir = get_updir();
+			//kpdir[32].val = updir[32].val;
 			//kpdir[33].val = updir[33].val;
 
 			//nemu_assert(ph->p_vaddr == 0x8048000);
