@@ -1,4 +1,5 @@
 #include "cpu/exec/helper.h"
+#include "../../../memory/tlb.h"
 
 #define DATA_BYTE 1
 #include "mov-template.h"
