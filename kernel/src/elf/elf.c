@@ -48,7 +48,7 @@ uint32_t loader() {
 			kpdir = get_kpdir();
 			updir = get_updir();
 			kpdir[32].val = updir[32].val;
-			kpdir[33].val = updir[33].val;
+			//kpdir[33].val = updir[33].val;
 
 			//nemu_assert(ph->p_vaddr == 0x8048000);
 			//nemu_assert(ph->p_filesz == 0x200);
