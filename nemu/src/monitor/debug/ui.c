@@ -11,6 +11,7 @@
 void cpu_exec(uint32_t);
 void pretend_cache_read(hwaddr_t , size_t );
 uint32_t cache_read(hwaddr_t, size_t);
+hwaddr_t page_translate(lnaddr_t);
 extern int nr_symtab_entry;
 extern Elf32_Sym *symtab;
 extern char *strtab;
@@ -50,6 +51,7 @@ static int cmd_d(char *args);
 static int cmd_bt(char *args);
 static int cmd_cache(char *args);
 static int cmd_realcache(char *args);
+static int cmd_page(char *args);
 
 static struct {
 	char *name;
@@ -67,7 +69,8 @@ static struct {
 	{ "d", "删除监视点,示例d N, 删除监视点序号为N的监视点", cmd_d },
 	{ "bt", "打印栈帧链", cmd_bt},
 	{ "cache", "cache ADDR 使用ADDR查找cache", cmd_cache},
-	{ "realcache", "similar to cache but real read addr", cmd_realcache}
+	{ "realcache", "similar to cache but real read addr", cmd_realcache},
+	{ "page", "page ADDR 对ADDR进行页级地址转换", cmd_page}
 
 	/* TODO: Add more commands */
 
@@ -267,6 +270,22 @@ static int cmd_realcache(char *args) {
 		cache_read(addr, 4);
 	return 0;
 }
+
+static int cmd_page(char *args) {
+	bool success;
+	int addr;
+	if (NULL == args) {
+		printf("page ADDR 对ADDR进行页级地址转换\n");
+		return 0;
+	}
+	addr = expr(args,&success);
+	if(false==success)
+		printf("Expression is wrong\n");
+	else
+		printf("translate result is %x\n", page_translate(addr));
+	return 0;
+}
+
 
 static int cmd_help(char *args) {
 	/* extract the first argument */
