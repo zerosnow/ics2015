@@ -40,8 +40,9 @@ uint32_t loader() {
 	for(i=0; i<elf->e_phnum;i++) {
 		/* Scan the program header table, load each segment into memory */
 		if(ph->p_type == PT_LOAD) {
-			nemu_assert(ph->p_vaddr == 0x8048000);
-			nemu_assert(ph->p_filesz < 0x200);
+
+			//nemu_assert(ph->p_vaddr == 0x8048000);
+			//nemu_assert(ph->p_filesz == 0x200);
 			 ramdisk_read((uint8_t *)(ph->p_vaddr), ph->p_offset, ph->p_filesz);
 			 memset((void *)(ph->p_vaddr+ph->p_filesz), 0, ph->p_memsz - ph->p_filesz);
 #ifdef IA32_PAGE
