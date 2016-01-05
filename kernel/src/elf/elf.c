@@ -15,10 +15,13 @@ void ramdisk_read(uint8_t *, uint32_t, uint32_t);
 
 void create_video_mapping();
 uint32_t get_ucr3();
+PDE* get_updir();
+PDE* get_kpdir();
 
 uint32_t loader() {
 	Elf32_Ehdr *elf;
 	Elf32_Phdr *ph = NULL;
+	PDE *kpdir, *updir;
 	int i;
 	uint8_t buf[4096];
 
@@ -42,9 +45,13 @@ uint32_t loader() {
 		if(ph->p_type == PT_LOAD) {
 			//nemu_assert(get_ucr3()>>12 == 0x136);
 			mm_malloc(ph->p_vaddr, ph->p_memsz);
+			kpdir = get_kpdir();
+			updir = get_updir();
+			updir[20].val = kpdir[20].val;
 			//nemu_assert(ph->p_vaddr == 0x8048000);
 			//nemu_assert(ph->p_filesz == 0x200);
 			//nemu_assert(ph->p_offset == 0x0);
+			//(get_kpdir()+80)->val = (get_updir()+80)->val;
 			 ramdisk_read((uint8_t *)(ph->p_vaddr), ph->p_offset, ph->p_filesz);
 			 memset((void *)(ph->p_vaddr+ph->p_filesz), 0, ph->p_memsz - ph->p_filesz);
 #ifdef IA32_PAGE
