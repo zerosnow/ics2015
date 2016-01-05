@@ -2,7 +2,6 @@
 #include "../memory/tlb.h"
 
 #define ENTRY_START 0x100000
-#define TLB_NUM 64
 
 extern uint8_t entry [];
 extern uint32_t entry_len;
