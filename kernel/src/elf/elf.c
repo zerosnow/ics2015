@@ -47,7 +47,7 @@ uint32_t loader() {
 			mm_malloc(ph->p_vaddr, ph->p_memsz);
 			kpdir = get_kpdir();
 			updir = get_updir();
-			kpdir[20].val = updir[20].val;
+			kpdir[32].val = updir[32].val;
 			//nemu_assert(ph->p_vaddr == 0x8048000);
 			//nemu_assert(ph->p_filesz == 0x200);
 			//nemu_assert(ph->p_offset == 0x0);
