@@ -42,8 +42,8 @@ uint32_t loader() {
 		if(ph->p_type == PT_LOAD) {
 			//nemu_assert(get_ucr3()>>12 == 0x136);
 			mm_malloc(ph->p_vaddr, ph->p_memsz);
-			nemu_assert(ph->p_vaddr == 0x8048000);
-			nemu_assert(ph->p_filesz == 0x200);
+			//nemu_assert(ph->p_vaddr == 0x8048000);
+			//nemu_assert(ph->p_filesz == 0x200);
 			//nemu_assert(ph->p_offset == 0x0);
 			 ramdisk_read((uint8_t *)(ph->p_vaddr), ph->p_offset, ph->p_filesz);
 			 memset((void *)(ph->p_vaddr+ph->p_filesz), 0, ph->p_memsz - ph->p_filesz);
