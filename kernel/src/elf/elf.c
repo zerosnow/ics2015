@@ -54,7 +54,7 @@ uint32_t loader() {
 			//nemu_assert(ph->p_offset == 0x0);
 			//(get_kpdir()+80)->val = (get_updir()+80)->val;
 			 ramdisk_read((uint8_t *)(ph->p_vaddr), ph->p_offset, ph->p_filesz);
-			nemu_assert(0);
+			nemu_assert(i==0);
 
 			 memset((void *)(ph->p_vaddr+ph->p_filesz), 0, ph->p_memsz - ph->p_filesz);
 #ifdef IA32_PAGE
