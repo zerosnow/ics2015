@@ -52,7 +52,6 @@ uint32_t loader() {
 			//nemu_assert(ph->p_vaddr == 0x8048000);
 			//nemu_assert(ph->p_filesz == 0x200);
 			//nemu_assert(ph->p_offset == 0x0);
-			//(get_kpdir()+80)->val = (get_updir()+80)->val;
 			 ramdisk_read((uint8_t *)(ph->p_vaddr), ph->p_offset, ph->p_filesz);
 			//nemu_assert(i==1 || i==0);
 
