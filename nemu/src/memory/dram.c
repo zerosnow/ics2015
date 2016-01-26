@@ -72,7 +72,7 @@ static void ddr3_read(hwaddr_t addr, void *data) {
 	memcpy(data, rowbufs[rank][bank].buf + col, BURST_LEN);
 }
 
-void update_cache(hwaddr_t addr, void *data, size_t len) {
+void update_cacheL2(hwaddr_t addr, void *data, size_t len) {
 	Assert(addr < HW_MEM_SIZE, "update_cache physical address %x is outside of the physical memory!", addr);
 
 	dram_addr temp;
