@@ -37,7 +37,6 @@ typedef  struct {
 
 cache_block cache[GROUP_NUM][BLOCK_NUM];	
 
-
 void init_cache() {
 	int i, j;
 	for(i = 0; i < GROUP_NUM; i ++) {
@@ -46,7 +45,6 @@ void init_cache() {
 		}
 	}
 }
-
 
 uint32_t cache_read(hwaddr_t addr,  size_t len) {
 	int i;
@@ -108,5 +106,3 @@ void cache_write(hwaddr_t addr, size_t len, uint32_t data) {
 			memcpy(&cache[caddr.r][i].block[caddr.w], &data, len);
 	L2cache_write(addr, len, data);
 }
-
-

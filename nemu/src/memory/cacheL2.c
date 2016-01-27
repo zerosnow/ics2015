@@ -104,7 +104,6 @@ void update_cacheL1(hwaddr_t addr, void *data, size_t len) {
 		L2cache_read(addr, 1);
 	}
 }
-
 void L2cache_write(hwaddr_t addr, size_t len, uint32_t data) {
 	int i;
 	L2cache_addr caddr;

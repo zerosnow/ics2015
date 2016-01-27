@@ -73,7 +73,6 @@ static struct {
 	{ "page", "page ADDR 对ADDR进行页级地址转换", cmd_page}
 
 	/* TODO: Add more commands */
-
 };
 
 typedef struct {
@@ -285,7 +284,6 @@ static int cmd_page(char *args) {
 		printf("translate result is %x\n", page_translate(addr));
 	return 0;
 }
-
 
 static int cmd_help(char *args) {
 	/* extract the first argument */

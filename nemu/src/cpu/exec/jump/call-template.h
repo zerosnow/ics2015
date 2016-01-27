@@ -16,6 +16,7 @@ static void do_execute() {
 	}
 	else 
 		cpu.eip +=op_src->val;
+	printf("%x\n", op_src->val);
 	call_stack[ptr_call_stack++] = 5;
 	print_asm_template1();
 }

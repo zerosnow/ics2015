@@ -1,6 +1,5 @@
 #include <stdlib.h>
 #include <time.h>
-
 #include <common.h>
 
 #include "tlb.h"
@@ -32,5 +31,4 @@ void writeTLB(uint32_t va, uint32_t pa) {
 	tlb[i].viaddr = va;
 	tlb[i].phaddr = pa;
 	tlb[i].valid = true;
-
 }

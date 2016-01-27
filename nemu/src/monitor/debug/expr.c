@@ -21,7 +21,6 @@ static struct rule {
 	/* TODO: Add more rules.
 	 * Pay attention to the precedence level of different rules.
 	 */
-
 	{" +",	NOTYPE, 0},				// spaces
 	{"==", EQU, 7},
 	{"\\!=", UNEQU, 7},
@@ -61,7 +60,6 @@ void init_regex() {
 		}
 	}
 }
-
 
 static int nr_token;
 Token tokens[32];
@@ -117,7 +115,6 @@ static bool make_token(char *e) {
 				 * to record the token in the array ``tokens''. For certain 
 				 * types of tokens, some extra actions should be performed.
 				 */
-
 				switch(rules[i].token_type) {
 					case NOTYPE:
 						break;
